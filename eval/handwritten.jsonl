@@ -1,0 +1,60 @@
+{"prompt": "Stop any UPI payment above 50k coming from a phone added in the last week, unless the merchant is on our whitelist.", "rule": "WHEN txn.method == UPI AND txn.amount > 50000 AND device.age_days < 7 AND NOT merchant.whitelisted THEN BLOCK reason=\"r\"", "clauses": 4}
+{"prompt": "Anything over one lakh should go to a human for review.", "rule": "WHEN txn.amount > 100000 THEN REVIEW reason=\"r\"", "clauses": 1}
+{"prompt": "We don't accept payments from rooted phones.", "rule": "WHEN device.is_rooted THEN BLOCK reason=\"r\"", "clauses": 1}
+{"prompt": "Whitelisted merchants always go through.", "rule": "WHEN merchant.whitelisted THEN ALLOW reason=\"r\"", "clauses": 1}
+{"prompt": "Decline card payments made between midnight and 5 AM.", "rule": "WHEN txn.method == CARD AND txn.hour < 5 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "If someone has failed more than 3 times in the last day, make a person look at their next payment.", "rule": "WHEN user.failed_attempts_24h > 3 THEN REVIEW reason=\"r\"", "clauses": 1}
+{"prompt": "Accounts younger than 30 days can't spend more than 10,000 rupees.", "rule": "WHEN user.account_age_days < 30 AND txn.amount > 10000 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Reject foreign payments from users without KYC.", "rule": "WHEN txn.is_international AND NOT user.kyc_verified THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Ten or more transactions in an hour looks suspicious, flag it.", "rule": "WHEN txn.count_1h >= 10 THEN REVIEW reason=\"r\"", "clauses": 1}
+{"prompt": "Small grocery purchases under 500 rupees are fine, approve them.", "rule": "WHEN merchant.category == GROCERY AND txn.amount < 500 THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Block gaming and electronics purchases on brand new devices.", "rule": "WHEN merchant.category IN [GAMING, ELECTRONICS] AND device.age_days < 7 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Send late-night wallet payments for manual checking; by late night I mean 11 PM or later.", "rule": "WHEN txn.method == WALLET AND txn.hour >= 23 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Net banking transfers of at least 5 lakh need review.", "rule": "WHEN txn.method == NETBANKING AND txn.amount >= 500000 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Unverified users shouldn't be able to pay more than 2000 rupees.", "rule": "WHEN NOT user.kyc_verified AND txn.amount > 2000 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Let utility bill payments through as long as KYC is done.", "rule": "WHEN merchant.category == UTILITIES AND user.kyc_verified THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Flag travel bookings over 75,000 rupees paid from outside India.", "rule": "WHEN merchant.category == TRAVEL AND txn.amount > 75000 AND txn.is_international THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Card testing rule: more than 15 payments in an hour, each below Rs 50, on a card. Block them.", "rule": "WHEN txn.count_1h > 15 AND txn.amount < 50 AND txn.method == CARD THEN BLOCK reason=\"r\"", "clauses": 3}
+{"prompt": "Reject payments if the phone is rooted or the user has more than 5 failures in the past 24 hours.", "rule": "WHEN device.is_rooted OR user.failed_attempts_24h > 5 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "New accounts paying by UPI at night must be reviewed.", "rule": "WHEN user.account_age_days < 30 AND txn.method == UPI AND txn.hour < 6 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Approve everything from devices older than a year.", "rule": "WHEN device.age_days > 365 THEN ALLOW reason=\"r\"", "clauses": 1}
+{"prompt": "Food orders are okay unless they cross 20,000 rupees.", "rule": "WHEN merchant.category == FOOD AND NOT txn.amount > 20000 THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Payments that aren't UPI or card should be checked by the team.", "rule": "WHEN NOT txn.method IN [UPI, CARD] THEN REVIEW reason=\"r\"", "clauses": 1}
+{"prompt": "Domestic payments of Rs 100 or less can pass straight through.", "rule": "WHEN NOT txn.is_international AND txn.amount <= 100 THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Hold anything from a non-whitelisted gaming merchant.", "rule": "WHEN NOT merchant.whitelisted AND merchant.category == GAMING THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Deny payments from accounts created in the last 3 days if they're above 25000.", "rule": "WHEN user.account_age_days < 3 AND txn.amount > 25000 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Review international wallet payments.", "rule": "WHEN txn.is_international AND txn.method == WALLET THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "If the device has been around for at least 90 days and KYC is complete, approve.", "rule": "WHEN device.age_days >= 90 AND user.kyc_verified THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Decline payments after 10 PM from merchants not on the whitelist.", "rule": "WHEN txn.hour >= 22 AND NOT merchant.whitelisted THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "A customer with 2 or more failed attempts on a new device should get reviewed.", "rule": "WHEN user.failed_attempts_24h >= 2 AND device.age_days < 7 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Any electronics purchase of 1 lakh or more, flag it unless the account is over a year old.", "rule": "WHEN merchant.category == ELECTRONICS AND txn.amount >= 100000 AND NOT user.account_age_days > 365 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Block high-velocity traffic: over 50 transactions in an hour.", "rule": "WHEN txn.count_1h > 50 THEN BLOCK reason=\"r\"", "clauses": 1}
+{"prompt": "Allow net banking and wallet payments under 1000 rupees.", "rule": "WHEN txn.method IN [NETBANKING, WALLET] AND txn.amount < 1000 THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Flag payments at night that are also above 5000 rupees.", "rule": "WHEN txn.hour < 6 AND txn.amount > 5000 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Reject mule-looking activity: account under two weeks old, no KYC, UPI, at least 40,000 rupees.", "rule": "WHEN user.account_age_days < 14 AND NOT user.kyc_verified AND txn.method == UPI AND txn.amount >= 40000 THEN BLOCK reason=\"r\"", "clauses": 4}
+{"prompt": "If the merchant isn't in grocery, food or utilities, and the phone is rooted, block it.", "rule": "WHEN NOT merchant.category IN [GROCERY, FOOD, UTILITIES] AND device.is_rooted THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Review payments before 8 in the morning from accounts less than 60 days old.", "rule": "WHEN txn.hour < 8 AND user.account_age_days < 60 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Payments over 2 lakh are blocked for non-KYC users, or for anyone on a rooted device.", "rule": "WHEN txn.amount > 200000 AND (NOT user.kyc_verified OR device.is_rooted) THEN BLOCK reason=\"r\"", "clauses": 3}
+{"prompt": "Automatically approve whitelisted merchants when the amount is at most 50 thousand.", "rule": "WHEN merchant.whitelisted AND txn.amount <= 50000 THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Send cross-border card payments over Rs 10000 to review.", "rule": "WHEN txn.is_international AND txn.method == CARD AND txn.amount > 10000 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Do not allow travel payments if the device is under 3 days old.", "rule": "WHEN merchant.category == TRAVEL AND device.age_days < 3 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Transactions with no failed attempts in 24 hours on verified accounts go through.", "rule": "WHEN user.failed_attempts_24h == 0 AND user.kyc_verified THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Flag anything that isn't a UPI payment if it's above ₹25,000.", "rule": "WHEN txn.method != UPI AND txn.amount > 25000 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Block rooted devices using a wallet.", "rule": "WHEN device.is_rooted AND txn.method == WALLET THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "If it's a new account or a new device and the amount is above 30000, hold for review.", "rule": "WHEN (user.account_age_days < 30 OR device.age_days < 7) AND txn.amount > 30000 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Approve repeat low-value food orders: at most 5 transactions in the last hour and under 300 rupees.", "rule": "WHEN merchant.category == FOOD AND txn.count_1h <= 5 AND txn.amount < 300 THEN ALLOW reason=\"r\"", "clauses": 3}
+{"prompt": "Decline all payments of 10 lakh and above.", "rule": "WHEN txn.amount >= 1000000 THEN BLOCK reason=\"r\"", "clauses": 1}
+{"prompt": "Check by hand any gaming payment made from 9 PM onwards.", "rule": "WHEN merchant.category == GAMING AND txn.hour >= 21 THEN REVIEW reason=\"r\"", "clauses": 2}
+{"prompt": "Users who haven't completed KYC may not pay internationally.", "rule": "WHEN NOT user.kyc_verified AND txn.is_international THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Pass payments from devices at least 6 months old, meaning 180 days, on whitelisted merchants.", "rule": "WHEN device.age_days >= 180 AND merchant.whitelisted THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Either 10 failed attempts or more, or more than 20 payments in the hour: block.", "rule": "WHEN user.failed_attempts_24h >= 10 OR txn.count_1h > 20 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Flag card or wallet payments over 1 lakh from accounts younger than 90 days.", "rule": "WHEN txn.method IN [CARD, WALLET] AND txn.amount > 100000 AND user.account_age_days < 90 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "Reject domestic payments above 5 lakh at night.", "rule": "WHEN NOT txn.is_international AND txn.amount > 500000 AND txn.hour < 6 THEN BLOCK reason=\"r\"", "clauses": 3}
+{"prompt": "Approve everything before noon from verified users.", "rule": "WHEN txn.hour < 12 AND user.kyc_verified THEN ALLOW reason=\"r\"", "clauses": 2}
+{"prompt": "Merchants outside the whitelist selling electronics get reviewed if the bill tops 40000.", "rule": "WHEN NOT merchant.whitelisted AND merchant.category == ELECTRONICS AND txn.amount > 40000 THEN REVIEW reason=\"r\"", "clauses": 3}
+{"prompt": "No payments allowed on a device that's only 1 day old or newer.", "rule": "WHEN device.age_days <= 1 THEN BLOCK reason=\"r\"", "clauses": 1}
+{"prompt": "Review payments of exactly 99999 rupees, those look like limit probing.", "rule": "WHEN txn.amount == 99999 THEN REVIEW reason=\"r\"", "clauses": 1}
+{"prompt": "When a rooted phone pays a travel or gaming merchant, deny it.", "rule": "WHEN device.is_rooted AND merchant.category IN [TRAVEL, GAMING] THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Let verified users with accounts over 2 years old (730 days) through on UPI.", "rule": "WHEN user.kyc_verified AND user.account_age_days > 730 AND txn.method == UPI THEN ALLOW reason=\"r\"", "clauses": 3}
+{"prompt": "International payments on new devices are always blocked, whatever the amount.", "rule": "WHEN txn.is_international AND device.age_days < 7 THEN BLOCK reason=\"r\"", "clauses": 2}
+{"prompt": "Flag utilities payments over 15000, since bills are rarely that high.", "rule": "WHEN merchant.category == UTILITIES AND txn.amount > 15000 THEN REVIEW reason=\"r\"", "clauses": 2}

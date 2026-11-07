@@ -1,0 +1,20 @@
+[project]
+name = "payrules"
+version = "0.1.0"
+description = "RLHF pipeline that compiles plain-English payment rules into a safe, typed DSL"
+requires-python = ">=3.11"
+dependencies = ["lark>=1.2,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+train = ["torch>=2.6", "transformers>=5", "peft>=0.15", "accelerate>=1"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
