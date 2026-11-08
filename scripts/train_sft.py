@@ -44,6 +44,8 @@ def main() -> None:
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--rank", type=int, default=32)
     parser.add_argument("--eval-rows", type=int, default=300)
+    parser.add_argument("--select-on", type=Path, default=None,
+                        help="Picks the epoch on this file instead of sft_val; use wording the model never trains on")
     parser.add_argument("--max-steps", type=int, default=0, help="Stop early; for smoke tests")
     parser.add_argument("--seed", type=int, default=13)
     args = parser.parse_args()
@@ -56,7 +58,7 @@ def main() -> None:
     model = new_lora_model(rank=args.rank)
     model.print_trainable_parameters()
     train_rows = read_jsonl(args.data / "sft_train.jsonl")
-    val_rows = read_jsonl(args.data / "sft_val.jsonl")[: args.eval_rows]
+    val_rows = read_jsonl(args.select_on or args.data / "sft_val.jsonl")[: args.eval_rows]
     examples = encode(train_rows, tokenizer)
     print("longest rule in tokens:", max(len(r) for _, r in examples),
           "| longest full example:", max(len(p) + len(r) for p, r in examples))
@@ -70,6 +72,7 @@ def main() -> None:
 
     best = -1.0
     step = 0
+    nonfinite = 0
     started = time.time()
     torch.cuda.reset_peak_memory_stats()
     with args.log.open("w", encoding="utf-8") as log:
@@ -84,6 +87,11 @@ def main() -> None:
                 )
                 with torch.autocast("cuda", dtype=torch.float16):
                     loss = model(input_ids=ids, attention_mask=mask, labels=labels).loss
+                # The scaler skips every step once the forward pass overflows, so the run would
+                # otherwise carry on for hours without learning anything.
+                nonfinite = 0 if torch.isfinite(loss) else nonfinite + 1
+                if nonfinite == 20:
+                    raise RuntimeError(f"loss not finite for 20 steps, stopped at step {step}; try a lower --lr")
                 optimizer.zero_grad(set_to_none=True)
                 scaler.scale(loss).backward()
                 scaler.unscale_(optimizer)

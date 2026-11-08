@@ -1,0 +1,2238 @@
+{
+ "nouns": [
+  "remittances",
+  "settlements",
+  "withdrawals",
+  "top-ups",
+  "wallet loads",
+  "fund transfers",
+  "outbound payments",
+  "inbound remittances",
+  "disbursements",
+  "payouts",
+  "card charges",
+  "instalment payments",
+  "bill payments",
+  "beneficiary transfers",
+  "cross-border transfers",
+  "pay-ins"
+ ],
+ "heads": [
+  "anything",
+  "any remittance",
+  "any settlement",
+  "any withdrawal",
+  "every disbursement",
+  "all payouts",
+  "all fund transfers",
+  "any top-up",
+  "any wallet load",
+  "every beneficiary transfer"
+ ],
+ "frames": {
+  "BLOCK": {
+   "np": [
+    "{Np} are prohibited.",
+    "{Np} shall be declined.",
+    "Under no circumstances should {np} proceed.",
+    "Decline {np} outright.",
+    "{Np} are to be rejected in full.",
+    "Kindly decline {np}.",
+    "{Np} must be refused.",
+    "{Np} must not be executed.",
+    "Processing of {np} is prohibited.",
+    "{Np} are barred from processing.",
+    "We do not process {np} under any terms.",
+    "{Np} are declined as a rule.",
+    "Decline {np} without exception.",
+    "Our policy: {np} are declined.",
+    "Compliance prohibits {np}.",
+    "{Np} shall not be accepted.",
+    "Accepting {np} is not permitted.",
+    "{Np} are not permitted.",
+    "{Np} may not be processed.",
+    "Under no circumstances accept {np}."
+   ],
+   "clause": [
+    "{C}? Decline it.",
+    "It shall be declined if {c}.",
+    "Under no circumstances should it proceed if {c}.",
+    "{C}: the payment is prohibited.",
+    "Where {c}, it is prohibited.",
+    "If {c}, it must be refused.",
+    "It is prohibited whenever {c}.",
+    "{C} -> prohibited.",
+    "If {c}, do not process it.",
+    "It must not proceed if {c}.",
+    "Where {c}, the payment shall be declined.",
+    "{C}, and the payment is refused.",
+    "Refuse it whenever {c}.",
+    "It is not to be processed when {c}.",
+    "Under no circumstances process it if {c}.",
+    "A decline applies if {c}.",
+    "If {c}, the payment is prohibited."
+   ],
+   "np_clause": [
+    "{Np} are prohibited if {c}.",
+    "{Np} shall be declined when {c}.",
+    "Under no circumstances should {np} proceed if {c}.",
+    "Decline {np} outright if {c}.",
+    "Processing of {np} is prohibited when {c}.",
+    "We do not process {np} if {c}.",
+    "{Np} must not be executed when {c}.",
+    "Kindly decline {np} if {c}.",
+    "{Np} shall be refused if {c}.",
+    "Decline {np} without exception when {c}.",
+    "{Np} are not permitted when {c}.",
+    "If {c}, we do not accept {np}.",
+    "Refuse {np} whenever {c}.",
+    "Prohibited: {np} when {c}."
+   ],
+   "np_unless": [
+    "{Np} are prohibited unless {c}.",
+    "{Np} shall be declined unless {c}.",
+    "Do not let {np} proceed unless {c}.",
+    "Decline {np} outright unless {c}.",
+    "{Np} are not permitted unless {c}.",
+    "We do not process {np} unless {c}.",
+    "{Np} must not be executed unless {c}.",
+    "Processing of {np} is prohibited unless {c}."
+   ],
+   "list": [
+    "Prohibited when all hold: {items}.",
+    "Decline when all of these hold: {items}.",
+    "Shall be declined if all of these hold: {items}.",
+    "Under no circumstances proceed when all hold: {items}.",
+    "Refuse when all of these are true: {items}.",
+    "Declined when: {items}.",
+    "Prohibited if all of these apply: {items}.",
+    "Do not process when all hold: {items}.",
+    "Refuse -> {items}."
+   ]
+  },
+  "ALLOW": {
+   "np": [
+    "{Np} are permitted.",
+    "There is no objection to {np}.",
+    "No objection to {np}.",
+    "There is no need to stop {np}.",
+    "{Np} are cleared for processing.",
+    "{Np} may be processed as normal.",
+    "Nothing stops {np} from going through.",
+    "We have no objection to {np}.",
+    "{Np} are acceptable.",
+    "Accept {np}.",
+    "Process {np} normally.",
+    "{Np} proceed without restriction.",
+    "{Np} may go ahead.",
+    "{Np} are authorised to proceed.",
+    "{Np} are not subject to any block.",
+    "No block applies to {np}.",
+    "There is nothing to stop {np}.",
+    "{Np} are not blocked.",
+    "No restriction applies to {np}.",
+    "There is no objection to {np} going through.",
+    "{Np} may pass.",
+    "{Np} are approved for processing."
+   ],
+   "clause": [
+    "{C}? No objection.",
+    "{C}: no block applies.",
+    "No objection if {c}.",
+    "There is no need to stop it when {c}.",
+    "It may be processed when {c}.",
+    "Nothing blocks it when {c}.",
+    "It is cleared for processing if {c}.",
+    "It is acceptable if {c}.",
+    "Where {c}, it is not blocked.",
+    "If {c}, it may proceed.",
+    "{C}, so there is no objection.",
+    "It is authorised to proceed whenever {c}.",
+    "It may go ahead if {c}.",
+    "No block applies if {c}.",
+    "There is no restriction when {c}.",
+    "{C} - no objection.",
+    "Processing is permitted if {c}."
+   ],
+   "np_clause": [
+    "{Np} are permitted if {c}.",
+    "There is no objection to {np} if {c}.",
+    "No objection to {np} when {c}.",
+    "There is no need to stop {np} when {c}.",
+    "Permit {np} if {c}.",
+    "{Np} may go ahead when {c}.",
+    "Process {np} normally when {c}.",
+    "If {c}, no block applies to {np}.",
+    "Accept {np} whenever {c}.",
+    "{Np} are acceptable when {c}.",
+    "Let {np} proceed if {c}.",
+    "No restriction applies to {np} if {c}.",
+    "{Np} may pass if {c}.",
+    "Nothing stops {np} when {c}."
+   ],
+   "np_unless": [
+    "{Np} are permitted unless {c}.",
+    "There is no objection to {np} unless {c}.",
+    "No objection to {np} unless {c}.",
+    "There is no need to stop {np} unless {c}.",
+    "Accept {np} unless {c}.",
+    "Process {np} normally unless {c}.",
+    "{Np} may go ahead unless {c}.",
+    "Let {np} proceed unless {c}.",
+    "No block applies to {np} unless {c}."
+   ],
+   "list": [
+    "Permitted when all hold: {items}.",
+    "No objection when all of these hold: {items}.",
+    "Cleared if all of these are true: {items}.",
+    "No block applies when: {items}.",
+    "Allowed when all of these hold: {items}.",
+    "May proceed if all hold: {items}.",
+    "Accept if every one of these holds: {items}.",
+    "No restriction when all of these are true: {items}.",
+    "Acceptable when: {items}."
+   ]
+  },
+  "REVIEW": {
+   "np": [
+    "Do not auto-decide {np}; someone should check.",
+    "{Np} must be held pending review.",
+    "Escalate {np} to the risk desk.",
+    "{Np} need to be checked by compliance.",
+    "Do not decide {np} automatically; someone should check.",
+    "Someone at the risk desk should check {np}.",
+    "Route {np} to a compliance officer.",
+    "{Np} should be decided by a person.",
+    "Send {np} to the ops team for a decision.",
+    "Open a compliance case on {np}.",
+    "Bring {np} to the risk desk.",
+    "{Np} must be referred to compliance.",
+    "A person must decide on {np}.",
+    "{Np}: refer to compliance.",
+    "Log a case for {np} and wait for a decision.",
+    "Surface {np} to compliance.",
+    "Have the risk desk decide on {np}.",
+    "{Np} are not to be auto-decided."
+   ],
+   "clause": [
+    "{C}? Do not auto-decide; someone should check.",
+    "If {c}, surface it to the ops team.",
+    "Escalate it to the risk desk when {c}.",
+    "When {c}, do not auto-decide it.",
+    "{C}: refer to compliance.",
+    "{C} -> open a case.",
+    "Someone should check it whenever {c}.",
+    "If {c}, a person must decide.",
+    "Refer the payment to compliance when {c}.",
+    "Surface it to compliance if {c}.",
+    "It must be held pending review when {c}.",
+    "Do not auto-decide it if {c}.",
+    "Bring it to the risk desk if {c}.",
+    "It is subject to manual review if {c}."
+   ],
+   "np_clause": [
+    "Refer {np} to compliance if {c}.",
+    "Open a case for {np} when {c}.",
+    "Do not auto-decide {np} if {c}; someone should check.",
+    "Surface {np} to the ops team when {c}.",
+    "If {c}, escalate {np} to the risk desk.",
+    "Someone should check {np} whenever {c}.",
+    "Bring {np} to compliance if {c}.",
+    "{Np} must be held pending review when {c}.",
+    "When {c}, a person should decide on {np}.",
+    "Open a compliance case for {np} if {c}.",
+    "Refer {np} to the risk desk when {c}.",
+    "Do not decide {np} automatically if {c}."
+   ],
+   "np_unless": [
+    "Do not auto-decide {np} unless {c}; someone should check.",
+    "Surface {np} to the ops team unless {c}.",
+    "{Np} must be held pending review unless {c}.",
+    "Escalate {np} to the risk desk unless {c}.",
+    "{Np} should be decided by a person unless {c}.",
+    "Someone should check {np} unless {c}.",
+    "Bring {np} to compliance unless {c}."
+   ],
+   "list": [
+    "Refer to compliance when all hold: {items}.",
+    "Open a case when all of these hold: {items}.",
+    "Surface to the ops team if all of these hold: {items}.",
+    "Do not auto-decide when all hold: {items}; someone should check.",
+    "Escalate to the risk desk when: {items}.",
+    "Someone should check when all of these are true: {items}.",
+    "Hold pending review when all hold: {items}.",
+    "Bring to compliance if every one of these holds: {items}.",
+    "A person decides when all hold: {items}."
+   ]
+  }
+ },
+ "concepts": {
+  "amount.gt": {
+   "pre": [],
+   "post": [
+    "that is more than {v}",
+    "amounting to over {v}",
+    "greater in value than {v}",
+    "of a sum over {v}",
+    "for a sum above {v}",
+    "with a value more than {v}",
+    "for more than {v} in value",
+    "totalling more than {v}",
+    "with a sum greater than {v}",
+    "carrying an amount over {v}",
+    "of a value above {v}"
+   ],
+   "clause": [
+    "the sum is more than {v}",
+    "the sum exceeds {v}",
+    "the value of the payment is above {v}",
+    "the total is greater than {v}",
+    "the payment value is over {v}",
+    "the amount is in excess of {v}",
+    "the amount is greater than {v}",
+    "the sum transferred is over {v}",
+    "the payment totals more than {v}",
+    "the charge is larger than {v}"
+   ],
+   "item": [
+    "value above {v}",
+    "amount in excess of {v}",
+    "total over {v}",
+    "amount greater than {v}",
+    "payment value > {v}",
+    "amount exceeds {v}"
+   ]
+  },
+  "amount.gte": {
+   "pre": [],
+   "post": [
+    "of not less than {v}",
+    "with a value of {v} or more",
+    "of {v} or greater",
+    "equal to or above {v}",
+    "no lower than {v}",
+    "totalling {v} or more",
+    "for a sum of {v} or greater",
+    "of a value at least {v}",
+    "amounting to {v} or more",
+    "for {v} and up",
+    "in the amount of {v} or more"
+   ],
+   "clause": [
+    "the sum is {v} or greater",
+    "the sum is at least {v}",
+    "the value is {v} or greater",
+    "the total is at least {v}",
+    "the total is no lower than {v}",
+    "the payment value is {v} or more",
+    "the amount is equal to or above {v}",
+    "the payment is for {v} or greater",
+    "the amount reaches at least {v}",
+    "the transfer amount is not less than {v}",
+    "the charge is {v} or greater"
+   ],
+   "item": [
+    "sum at least {v}",
+    "value {v} or greater",
+    "total at or above {v}",
+    "amount {v} or greater",
+    "at or above {v}",
+    "sum no lower than {v}"
+   ]
+  },
+  "amount.lt": {
+   "pre": [],
+   "post": [
+    "less than {v} in value",
+    "of a sum less than {v}",
+    "amounting to less than {v}",
+    "for a sum below {v}",
+    "lower in value than {v}",
+    "totalling under {v}",
+    "for an amount of less than {v}",
+    "in a value under {v}",
+    "of a total below {v}",
+    "of a value less than {v}",
+    "whose total is under {v}"
+   ],
+   "clause": [
+    "the sum is under {v}",
+    "the sum is less than {v}",
+    "the value is less than {v}",
+    "the total is under {v}",
+    "the payment value is below {v}",
+    "the amount is smaller than {v}",
+    "the charge is under {v}",
+    "the transfer amount is below {v}",
+    "the amount does not reach {v}",
+    "the total is lower than {v}"
+   ],
+   "item": [
+    "sum under {v}",
+    "value below {v}",
+    "amount less than {v}",
+    "total under {v}",
+    "amount lower than {v}",
+    "payment value under {v}",
+    "sum < {v}"
+   ]
+  },
+  "amount.lte": {
+   "pre": [],
+   "post": [
+    "in an amount not exceeding {v}",
+    "for a sum of {v} or below",
+    "with a value at or below {v}",
+    "for {v} or under",
+    "totalling {v} or less",
+    "of a value {v} or lower",
+    "with a total no greater than {v}",
+    "amounting to {v} or less",
+    "not greater than {v}",
+    "for a sum no higher than {v}"
+   ],
+   "clause": [
+    "the amount is not greater than {v}",
+    "the amount does not exceed {v}",
+    "the sum is {v} or less",
+    "the sum is at most {v}",
+    "the total is at or below {v}",
+    "the total is no greater than {v}",
+    "the payment value is {v} or less",
+    "the charge is at most {v}",
+    "the transfer amount is {v} or lower",
+    "the amount is {v} or under",
+    "the value is not greater than {v}",
+    "the sum is no higher than {v}"
+   ],
+   "item": [
+    "sum at most {v}",
+    "amount at or below {v}",
+    "value {v} or less",
+    "total no greater than {v}",
+    "amount not above {v}",
+    "{v} or under",
+    "sum {v} or less"
+   ]
+  },
+  "device_age.gt": {
+   "pre": [],
+   "post": [
+    "from devices in use for more than {v}",
+    "from devices known to us for over {v}",
+    "from devices that have been seen for more than {v}",
+    "from devices active longer than {v}",
+    "from handsets that have been used for over {v}",
+    "from devices first recorded more than {v} ago",
+    "from devices whose first sighting was over {v} ago",
+    "from devices we have known for more than {v}",
+    "from phones in use for over {v}",
+    "from devices with a history older than {v}",
+    "from devices registered over {v} ago",
+    "from devices with a first-seen date more than {v} ago"
+   ],
+   "clause": [
+    "the device has been in use for more than {v}",
+    "the device was first recorded over {v} ago",
+    "the device has been known to us for over {v}",
+    "the device history is older than {v}",
+    "the device's first sighting was more than {v} ago",
+    "the device age exceeds {v}",
+    "the device has been registered for over {v}",
+    "the handset is in use for more than {v}",
+    "the phone was first recorded more than {v} ago",
+    "the device's age is over {v}",
+    "the device has a history older than {v}"
+   ],
+   "item": [
+    "device in use over {v}",
+    "device known for more than {v}",
+    "device history older than {v}",
+    "device first seen over {v} ago",
+    "device age greater than {v}",
+    "handset history over {v}"
+   ]
+  },
+  "device_age.gte": {
+   "pre": [],
+   "post": [
+    "from devices known for {v} or more",
+    "from devices with a first sighting {v} or more ago",
+    "from devices in use for at least {v}",
+    "from devices recorded at least {v} ago",
+    "from devices with a history of {v} or more",
+    "from phones known for {v} or longer",
+    "from devices first recorded {v} or more ago",
+    "from devices whose age is at least {v}",
+    "from devices registered {v} or more ago",
+    "from handsets in use for {v} or longer",
+    "from devices aged at least {v}"
+   ],
+   "clause": [
+    "the device has been known for at least {v}",
+    "the device is at least {v} in age",
+    "the device has been in use for {v} or more",
+    "the device was first recorded {v} or more ago",
+    "the device history is at least {v}",
+    "the device age is at least {v}",
+    "the device age is {v} or greater",
+    "the device has been registered for {v} or longer",
+    "the handset has been in use for at least {v}",
+    "the phone was first recorded at least {v} ago",
+    "the device's age is {v} or more",
+    "the device history covers {v} or more"
+   ],
+   "item": [
+    "device known {v} or more",
+    "device age at least {v}",
+    "device in use {v} or longer",
+    "device history {v}+",
+    "device recorded at least {v} ago",
+    "device age {v} or greater",
+    "phone known for {v}+"
+   ]
+  },
+  "device_age.lt": {
+   "pre": [],
+   "post": [
+    "from devices first seen less than {v} ago",
+    "from devices in use for less than {v}",
+    "from devices known to us for under {v}",
+    "from devices with a history shorter than {v}",
+    "from handsets in use for under {v}",
+    "from devices registered less than {v} ago",
+    "from devices whose history is under {v}",
+    "from devices with a first sighting under {v} ago",
+    "from phones known for less than {v}",
+    "from devices recorded less than {v} ago"
+   ],
+   "clause": [
+    "the device has been in use for less than {v}",
+    "the device was first recorded less than {v} ago",
+    "the device has been known to us for under {v}",
+    "the device age falls below {v}",
+    "the handset has been in use for under {v}",
+    "the phone was first recorded less than {v} ago",
+    "the device's age is below {v}",
+    "the device has been registered for less than {v}",
+    "the device history is under {v}",
+    "the device has a history shorter than {v}"
+   ],
+   "item": [
+    "device in use under {v}",
+    "device history shorter than {v}",
+    "device known for less than {v}",
+    "device recorded less than {v} ago",
+    "handset age under {v}",
+    "phone history under {v}"
+   ]
+  },
+  "device_age.lte": {
+   "pre": [],
+   "post": [
+    "from devices in use for {v} or less",
+    "from devices with a history of {v} or less",
+    "from devices first recorded {v} ago or less",
+    "from devices in use for at most {v}",
+    "from devices recorded no more than {v} ago",
+    "from devices whose age is {v} or less",
+    "from devices with a history not greater than {v}",
+    "from handsets known for at most {v}",
+    "from devices registered {v} ago or less",
+    "from devices aged no more than {v}",
+    "from devices first seen not more than {v} ago"
+   ],
+   "clause": [
+    "the device has been in use for {v} or less",
+    "the device was first recorded {v} ago or less",
+    "the device has been known for at most {v}",
+    "the device age does not exceed {v}",
+    "the device's age is at most {v}",
+    "the device has been registered for {v} or less",
+    "the phone's age is no more than {v}",
+    "the device history is no longer than {v}",
+    "the handset has been in use for at most {v}",
+    "the device was first recorded no more than {v} ago",
+    "the device age is not greater than {v}"
+   ],
+   "item": [
+    "device in use {v} or less",
+    "device history at most {v}",
+    "device known for no more than {v}",
+    "device age not greater than {v}",
+    "device recorded {v} ago or less",
+    "handset history at most {v}",
+    "phone known {v} or less"
+   ]
+  },
+  "device_age.new": {
+   "pre": [
+    "unseen-device",
+    "no-record-device"
+   ],
+   "post": [
+    "from devices with no prior history",
+    "from devices we have never seen",
+    "from devices that have no prior sighting",
+    "from handsets with no earlier record",
+    "from devices absent from our records",
+    "from devices not in our records",
+    "from devices without any prior record",
+    "from devices with no earlier sightings",
+    "on devices with no history with us",
+    "from devices our systems have never recorded",
+    "from phones with no record with us",
+    "from devices showing no prior activity"
+   ],
+   "clause": [
+    "the device has no prior history",
+    "we have never seen this device",
+    "the device is not in our records",
+    "the handset has no earlier record",
+    "the device has no prior sighting",
+    "there is no earlier record of the device",
+    "the device is unseen by us",
+    "this device has no record with us",
+    "the phone has no history with us",
+    "the device has no earlier activity on record",
+    "we have no record of the device",
+    "the device has no earlier sightings",
+    "the device is not known to us"
+   ],
+   "item": [
+    "no prior device history",
+    "device not in records",
+    "device never seen",
+    "device with no earlier record",
+    "handset not in records",
+    "device not known to us"
+   ]
+  },
+  "account_age.gt": {
+   "pre": [],
+   "post": [
+    "from accounts open for more than {v}",
+    "from accounts held for over {v}",
+    "from accounts that were opened over {v} ago",
+    "from customers whose accounts are more than {v} old",
+    "from accounts with a history over {v}",
+    "from accounts in existence for more than {v}",
+    "from accounts first created over {v} ago",
+    "from accounts established more than {v} ago",
+    "from users whose sign-up was over {v} ago",
+    "from accounts of more than {v} standing",
+    "from accounts that have been open for over {v}",
+    "from accounts whose history exceeds {v}"
+   ],
+   "clause": [
+    "the account has been open for more than {v}",
+    "the account was first created over {v} ago",
+    "the account has existed for over {v}",
+    "the account's history exceeds {v}",
+    "the account was established more than {v} ago",
+    "the customer's account has been held for over {v}",
+    "the account is over {v} in age",
+    "the user's sign-up was more than {v} ago",
+    "the account has been open longer than {v}",
+    "the account existed for more than {v}"
+   ],
+   "item": [
+    "account open over {v}",
+    "account history over {v}",
+    "account age greater than {v}",
+    "account existed more than {v}",
+    "account created over {v} ago",
+    "acct open for more than {v}",
+    "signed up more than {v} ago"
+   ]
+  },
+  "account_age.gte": {
+   "pre": [],
+   "post": [
+    "from accounts open for at least {v}",
+    "from accounts held for {v} or more",
+    "from accounts first created {v} or more ago",
+    "from customers whose accounts are at least {v} old",
+    "from accounts with a history of {v} or more",
+    "from accounts in existence for at least {v}",
+    "from accounts established {v} or more ago",
+    "from accounts that have been open {v} or longer",
+    "from users who signed up {v} or more ago",
+    "from accounts whose age is {v} or greater",
+    "from accounts aged {v} or greater",
+    "from accounts open {v}+"
+   ],
+   "clause": [
+    "the account has been open for at least {v}",
+    "the account was first created {v} or more ago",
+    "the account has existed for {v} or longer",
+    "the account's history is at least {v}",
+    "the account age is at least {v}",
+    "the account was established {v} or more ago",
+    "the customer's account has been held for {v} or more",
+    "the account is {v} or greater in age",
+    "the user signed up at least {v} ago",
+    "the account has been open {v} or longer",
+    "the account's age is {v} or more",
+    "the account existed for at least {v}"
+   ],
+   "item": [
+    "account open at least {v}",
+    "account history {v} or more",
+    "account age {v} or greater",
+    "account in existence {v}+",
+    "account created {v} or more ago",
+    "acct held {v} or longer",
+    "signed up at least {v} ago"
+   ]
+  },
+  "account_age.lt": {
+   "pre": [],
+   "post": [
+    "from accounts open for less than {v}",
+    "from accounts held for under {v}",
+    "from accounts first created less than {v} ago",
+    "from customers whose accounts are under {v} old",
+    "from accounts with a history shorter than {v}",
+    "from accounts in existence for under {v}",
+    "from accounts established less than {v} ago",
+    "from accounts that have been open under {v}",
+    "from users who signed up less than {v} ago",
+    "from accounts whose age is below {v}",
+    "from accounts aged under {v}",
+    "from accounts open for shorter than {v}"
+   ],
+   "clause": [
+    "the account has been open for less than {v}",
+    "the account was first created less than {v} ago",
+    "the account has existed for under {v}",
+    "the account's history is shorter than {v}",
+    "the account was established less than {v} ago",
+    "the customer's account has been held for under {v}",
+    "the account is under {v} in age",
+    "the user signed up less than {v} ago",
+    "the account has been open shorter than {v}",
+    "the account's age is below {v}",
+    "the account existed for less than {v}"
+   ],
+   "item": [
+    "account open under {v}",
+    "account history shorter than {v}",
+    "account age less than {v}",
+    "account existed under {v}",
+    "account created less than {v} ago",
+    "acct held under {v}",
+    "signed up less than {v} ago"
+   ]
+  },
+  "account_age.lte": {
+   "pre": [],
+   "post": [
+    "from accounts open for {v} or less",
+    "from accounts held for at most {v}",
+    "from accounts first created {v} ago or less",
+    "from customers whose accounts are at most {v} old",
+    "from accounts with a history of {v} or less",
+    "from accounts in existence for no more than {v}",
+    "from accounts established {v} ago or less",
+    "from accounts open for not more than {v}",
+    "from users who signed up {v} ago or less",
+    "from accounts whose age is {v} or less",
+    "from accounts whose age is no more than {v}",
+    "from accounts open {v} or less"
+   ],
+   "clause": [
+    "the account has been open for {v} or less",
+    "the account was first created {v} ago or less",
+    "the account has existed for at most {v}",
+    "the account's history is {v} or shorter",
+    "the account age is not greater than {v}",
+    "the account was established {v} ago or less",
+    "the customer's account has been held for at most {v}",
+    "the account is {v} or less in age",
+    "the user signed up {v} ago or less",
+    "the account has been open no more than {v}",
+    "the account's age is at most {v}",
+    "the account existed for no more than {v}"
+   ],
+   "item": [
+    "account open {v} or less",
+    "account history at most {v}",
+    "account age not greater than {v}",
+    "account existed at most {v}",
+    "account created {v} ago or less",
+    "acct held at most {v}",
+    "signed up {v} ago or less"
+   ]
+  },
+  "account_age.new": {
+   "pre": [
+    "first-time-account",
+    "no-history-account"
+   ],
+   "post": [
+    "from accounts with no prior history",
+    "from accounts that have no history with us",
+    "from accounts we have never held before",
+    "from freshly opened accounts",
+    "from accounts with no earlier record",
+    "from accounts without any earlier history",
+    "from first-time account holders",
+    "from accounts opened with no prior record",
+    "from accounts that carry no history",
+    "by account holders with no past record"
+   ],
+   "clause": [
+    "the account has no prior history",
+    "the account has no earlier record",
+    "the account has no history with us",
+    "we have no earlier record of this account",
+    "the account is without any prior history",
+    "this account has no earlier record",
+    "the holder has no prior history with us",
+    "the user is a first-time account holder",
+    "there is no history on the account",
+    "the account carries no past record",
+    "the customer has no earlier history",
+    "the account shows no prior history"
+   ],
+   "item": [
+    "no prior account history",
+    "account has no history",
+    "account with no record",
+    "first-time account holder",
+    "no earlier account record",
+    "account without history",
+    "account not seen before"
+   ]
+  },
+  "velocity.gt": {
+   "pre": [],
+   "post": [
+    "from users who sent more than {n} payments within the past hour",
+    "from users who executed more than {n} payments in one hour",
+    "from users whose payment count for the last hour exceeds {n}",
+    "from users with a payment count above {n} in the last hour",
+    "from users who initiated more than {n} payments in an hour",
+    "from users with more than {n} payment events in the last hour",
+    "from users whose hourly payment count is above {n}",
+    "from users who pushed more than {n} payments through in an hour",
+    "from users who placed over {n} payments in the last hour",
+    "from users running more than {n} payments an hour",
+    "from users who went above {n} payments in the last hour"
+   ],
+   "clause": [
+    "the user placed more than {n} payments in the last hour",
+    "the user has initiated over {n} payments in the past hour",
+    "the user's hourly payment count is above {n}",
+    "the user has sent more than {n} payments in an hour",
+    "the user's payment count for the last hour exceeds {n}",
+    "the user has placed over {n} payments within the last hour",
+    "the user executed more than {n} payments in one hour",
+    "the user has gone above {n} payments in the last hour",
+    "the payment count for the user in the past hour is over {n}",
+    "the user has more than {n} payment events in the last hour",
+    "the user's hourly count is greater than {n}",
+    "the user initiated more than {n} payments in the last hour"
+   ],
+   "item": [
+    "payments in last hour above {n}",
+    "more than {n} payments per hour",
+    "over {n} payments in one hour",
+    "hourly count above {n}",
+    "hourly payment count over {n}",
+    "more than {n} payments in 60 minutes",
+    "payment count > {n} per hour"
+   ]
+  },
+  "velocity.gte": {
+   "pre": [],
+   "post": [
+    "from users who placed {n} or more payments in the last hour",
+    "from users who sent at least {n} payments in the past hour",
+    "from users with {n} payments or greater in the last hour",
+    "from users who initiated at least {n} payments in an hour",
+    "from users whose hourly payment count is {n} or more",
+    "from users executing {n} or more payments in one hour",
+    "from users who logged {n} or more payments in the last hour",
+    "from users whose last-hour payment count is at least {n}",
+    "from users who reached {n} payments or more in an hour",
+    "from users placing {n} or more payments per hour",
+    "from users with {n}+ payment events in the last hour",
+    "from users who sent {n} or more payments in 60 minutes"
+   ],
+   "clause": [
+    "the user placed at least {n} payments in the last hour",
+    "the user has initiated {n} or more payments in the past hour",
+    "the user's hourly payment count is at least {n}",
+    "the user has sent {n} or more payments in an hour",
+    "the user's payment count for the last hour is {n} or greater",
+    "the user executed at least {n} payments in one hour",
+    "the user has reached {n} or more payments in the last hour",
+    "the user's last-hour payment count is {n} or more",
+    "the payment count for the user in the past hour is at least {n}",
+    "the user has {n}+ payment events in the last hour",
+    "the user's hourly count is {n} or greater",
+    "the user sent at least {n} payments in 60 minutes"
+   ],
+   "item": [
+    "at least {n} payments in an hour",
+    "{n} or more payments per hour",
+    "hourly payment count {n} or more",
+    "{n} or more payments in one hour",
+    "{n} or more payments in 60 minutes",
+    "last-hour payments at least {n}",
+    "hourly count at least {n}"
+   ]
+  },
+  "velocity.lt": {
+   "pre": [],
+   "post": [
+    "from users who placed fewer than {n} payments in the last hour",
+    "from users who sent less than {n} payments in the past hour",
+    "from users who initiated fewer than {n} payments in an hour",
+    "from users whose hourly payment count is under {n}",
+    "from users executing fewer than {n} payments in one hour",
+    "from users with a last-hour payment count below {n}",
+    "from users who sent under {n} payments in 60 minutes",
+    "from users placing less than {n} payments per hour",
+    "from users who reached fewer than {n} payments in the last hour",
+    "from users whose payment count for the last hour is below {n}",
+    "from users with fewer than {n} payment events in the last hour",
+    "from users logging under {n} payments an hour"
+   ],
+   "clause": [
+    "the user placed fewer than {n} payments in the last hour",
+    "the user has initiated under {n} payments in the past hour",
+    "the user's hourly payment count is below {n}",
+    "the user has sent fewer than {n} payments in an hour",
+    "the user's payment count for the last hour is under {n}",
+    "the user executed fewer than {n} payments in one hour",
+    "the user has reached fewer than {n} payments in the last hour",
+    "the user's last-hour payment count is less than {n}",
+    "the payment count for the user in the past hour is under {n}",
+    "the user has fewer than {n} payment events in the last hour",
+    "the user sent less than {n} payments in 60 minutes"
+   ],
+   "item": [
+    "fewer than {n} payments in an hour",
+    "under {n} payments per hour",
+    "hourly payment count under {n}",
+    "under {n} payments in one hour",
+    "fewer than {n} payments in 60 minutes",
+    "last-hour payments below {n}",
+    "hourly count below {n}"
+   ]
+  },
+  "velocity.lte": {
+   "pre": [],
+   "post": [
+    "from users who placed {n} or fewer payments in the last hour",
+    "from users who sent at most {n} payments in the past hour",
+    "from users who initiated {n} or fewer payments in an hour",
+    "from users whose hourly payment count is {n} or less",
+    "from users executing at most {n} payments in one hour",
+    "from users with a last-hour payment count of {n} or less",
+    "from users who sent {n} or fewer payments in 60 minutes",
+    "from users placing {n} payments or fewer per hour",
+    "from users who reached no more than {n} payments in the last hour",
+    "from users whose payment count for the last hour is at most {n}",
+    "from users with {n} or fewer payment events in the last hour",
+    "from users logging at most {n} payments an hour",
+    "from users who placed up to {n} payments in an hour"
+   ],
+   "clause": [
+    "the user placed {n} or fewer payments in the last hour",
+    "the user has initiated at most {n} payments in the past hour",
+    "the user's hourly payment count is {n} or less",
+    "the user has sent no more than {n} payments in an hour",
+    "the user's payment count for the last hour is at most {n}",
+    "the user executed up to {n} payments in one hour",
+    "the user has reached no more than {n} payments in the last hour",
+    "the user's last-hour payment count is {n} or less",
+    "the payment count for the user in the past hour is at most {n}",
+    "the user has {n} or fewer payment events in the last hour",
+    "the user's hourly count is at most {n}",
+    "the user sent up to {n} payments in 60 minutes"
+   ],
+   "item": [
+    "{n} or fewer payments in an hour",
+    "at most {n} payments per hour",
+    "hourly payment count at most {n}",
+    "up to {n} payments in one hour",
+    "{n} or fewer payments in 60 minutes",
+    "last-hour payments at most {n}",
+    "hourly count {n} or less"
+   ]
+  },
+  "failed.gt": {
+   "pre": [],
+   "post": [
+    "from users who logged more than {n} failed attempts in 24 hours",
+    "from users with over {n} unsuccessful attempts in the last 24 hours",
+    "from users who had more than {n} unsuccessful tries in 24 hours",
+    "from accounts that recorded over {n} failed attempts in 24 hours",
+    "from users with over {n} failed attempts on record in the last day",
+    "from users with a count of failed attempts above {n} in 24 hours",
+    "from users with more than {n} failed transactions in the last day",
+    "from users who exceeded {n} failed attempts in the past 24 hours",
+    "from users with failed attempts over {n} in one day",
+    "from users with more than {n} failed attempts recorded in 24 hours",
+    "from users whose failed attempts in 24 hours exceed {n}"
+   ],
+   "clause": [
+    "the user has had over {n} unsuccessful attempts in the last 24 hours",
+    "the user's failed attempts in the last day exceed {n}",
+    "the failed attempt count over 24 hours is greater than {n}",
+    "the user recorded more than {n} failed attempts in 24 hours",
+    "there were more than {n} failed attempts in the past day",
+    "the account's 24-hour failed attempts exceed {n}",
+    "the user has logged more than {n} failed attempts in 24 hours",
+    "the user has exceeded {n} failed attempts in the past 24 hours",
+    "the count of failed attempts in 24 hours is above {n}",
+    "the user has more than {n} unsuccessful tries in one day",
+    "the user has had failed attempts in excess of {n} in 24 hours",
+    "failed attempts in the last 24 hours are more than {n}"
+   ],
+   "item": [
+    "over {n} unsuccessful attempts in 24h",
+    "failed attempts greater than {n} in 24h",
+    "more than {n} failed attempts in a day",
+    "failed attempts exceed {n} in 24 hours",
+    "24h failed attempts over {n}",
+    "failed attempts in 24h above {n}"
+   ]
+  },
+  "failed.gte": {
+   "pre": [],
+   "post": [
+    "from users with at least {n} failed tries in 24 hours",
+    "from users who logged {n} or more failed attempts in the last day",
+    "from users who recorded at least {n} failed attempts in 24 hours",
+    "from accounts with {n} or more failures in the past day",
+    "from users whose failed attempts in 24 hours reach {n}",
+    "from users with failed attempts of {n} or greater in 24 hours",
+    "from users who accumulated {n} or more failed attempts in a day",
+    "from users with at least {n} unsuccessful tries in the last day",
+    "from accounts with {n}+ failed attempts in 24 hours",
+    "from users with a failed-attempt count of {n} or more in 24 hours",
+    "from users with no fewer than {n} failed tries in a day"
+   ],
+   "clause": [
+    "the user has {n} or more unsuccessful attempts in the last 24 hours",
+    "the user's failed attempts in 24 hours are at least {n}",
+    "the failed attempt count over 24 hours is {n} or greater",
+    "the user recorded at least {n} failed attempts in the past 24 hours",
+    "the user has accumulated {n} or more failed attempts in a day",
+    "the account has {n} or more failures in the past day",
+    "the user has at least {n} unsuccessful tries in one day",
+    "the user's 24-hour failed attempts number {n} or more",
+    "the count of failed attempts in 24 hours is at least {n}",
+    "the user has logged {n}+ failed attempts in 24 hours",
+    "failed attempts in the last 24 hours reach {n}",
+    "the user has no fewer than {n} failed tries in a day"
+   ],
+   "item": [
+    "{n} or more unsuccessful attempts in 24h",
+    "failed attempts at least {n} in 24h",
+    "at least {n} failed tries in one day",
+    "{n} or more failed attempts in a day",
+    "24h failed attempts {n} or more",
+    "failed attempts of {n}+ in 24 hours",
+    "failed count at least {n}"
+   ]
+  },
+  "failed.lt": {
+   "pre": [],
+   "post": [
+    "from users with less than {n} failed tries in 24 hours",
+    "from users who logged fewer than {n} failed attempts in the last day",
+    "from users with under {n} unsuccessful attempts in 24 hours",
+    "from users who recorded less than {n} failed attempts in 24 hours",
+    "from accounts with under {n} failures in the past day",
+    "from users whose failed attempts in 24 hours fall below {n}",
+    "from users with a failed-attempt count under {n} in 24 hours",
+    "from users who accumulated fewer than {n} failed attempts in a day",
+    "from users with fewer than {n} unsuccessful tries in one day",
+    "from accounts with less than {n} failed attempts in 24 hours",
+    "from users with failed attempts fewer than {n} in 24 hours"
+   ],
+   "clause": [
+    "the user has fewer than {n} unsuccessful attempts in the last 24 hours",
+    "the user's failed attempts in 24 hours are below {n}",
+    "the failed attempt count over 24 hours is less than {n}",
+    "the user recorded fewer than {n} failed attempts in the past 24 hours",
+    "the user has accumulated under {n} failed attempts in a day",
+    "the account has fewer than {n} failures in the past day",
+    "the user has less than {n} unsuccessful tries in one day",
+    "the user's 24-hour failed attempts number under {n}",
+    "the count of failed attempts in 24 hours is below {n}",
+    "the user has logged fewer than {n} failed attempts in 24 hours",
+    "failed attempts in the last 24 hours stay under {n}"
+   ],
+   "item": [
+    "fewer than {n} unsuccessful attempts in 24h",
+    "failed attempts below {n} in 24h",
+    "under {n} failed tries in one day",
+    "fewer than {n} failed attempts in a day",
+    "24h failed attempts under {n}",
+    "failed count below {n}",
+    "failed attempts less than {n} in 24 hours"
+   ]
+  },
+  "failed.lte": {
+   "pre": [],
+   "post": [
+    "from users with at most {n} failed tries in 24 hours",
+    "from users who logged {n} or fewer failed attempts in the last day",
+    "from users with no more than {n} unsuccessful attempts in 24 hours",
+    "from users who recorded at most {n} failed attempts in 24 hours",
+    "from accounts with {n} or fewer failures in the past day",
+    "from users whose failed attempts in 24 hours do not exceed {n}",
+    "from users with a failed-attempt count of {n} or less in 24 hours",
+    "from users who accumulated up to {n} failed attempts in a day",
+    "from users with {n} or fewer unsuccessful tries in one day",
+    "from accounts with at most {n} failed attempts in 24 hours",
+    "from users with failed attempts {n} or less in 24 hours"
+   ],
+   "clause": [
+    "the user has {n} or fewer unsuccessful attempts in the last 24 hours",
+    "the user's failed attempts in 24 hours are at most {n}",
+    "the failed attempt count over 24 hours is {n} or less",
+    "the user recorded no more than {n} failed attempts in the past 24 hours",
+    "the user has accumulated up to {n} failed attempts in a day",
+    "the account has {n} or fewer failures in the past day",
+    "the user has at most {n} unsuccessful tries in one day",
+    "the user's 24-hour failed attempts number {n} or fewer",
+    "the count of failed attempts in 24 hours is at most {n}",
+    "the user has logged {n} or fewer failed attempts in 24 hours",
+    "failed attempts in the last 24 hours stay at or below {n}",
+    "the user has no more than {n} failed tries in a day"
+   ],
+   "item": [
+    "{n} or fewer unsuccessful attempts in 24h",
+    "failed attempts at most {n} in 24h",
+    "up to {n} failed tries in one day",
+    "{n} or fewer failed attempts in a day",
+    "24h failed attempts at most {n}",
+    "failed count {n} or less",
+    "failed attempts no more than {n} in 24 hours"
+   ]
+  },
+  "hour.before": {
+   "pre": [],
+   "post": [
+    "carried out before {t}",
+    "scheduled before {t}",
+    "requested before {t}",
+    "executed before {t}",
+    "recorded as occurring before {t}",
+    "that take place before {t}"
+   ],
+   "clause": [
+    "the time is earlier than {t}",
+    "the clock reads before {t}",
+    "the payment is submitted before {t}",
+    "the transaction is carried out before {t}",
+    "the local time falls before {t}",
+    "the payment is logged before {t}",
+    "the transaction is requested before {t}",
+    "the attempt happens before {t}",
+    "the txn is processed before {t}",
+    "the payment takes place before {t}",
+    "the local clock shows a time before {t}"
+   ],
+   "item": [
+    "time earlier than {t}",
+    "local time before {t}",
+    "logged before {t}"
+   ]
+  },
+  "hour.from": {
+   "pre": [],
+   "post": [
+    "submitted from {t} onwards",
+    "requested from {t} on",
+    "carried out at or after {t}",
+    "processed from {t} onwards",
+    "executed at {t} or after",
+    "occurring from {t} on",
+    "taking place at or after {t}",
+    "that take place from {t} onwards",
+    "happening from {t} and beyond",
+    "submitted at {t} or after"
+   ],
+   "clause": [
+    "the time is {t} or after",
+    "the local time is at or after {t}",
+    "the payment is submitted from {t} onwards",
+    "the transaction is carried out at {t} or after",
+    "the clock reads {t} or later",
+    "the payment is logged from {t} onward",
+    "the txn is processed at or after {t}",
+    "the payment takes place from {t} on",
+    "the attempt happens at or after {t}",
+    "the local clock shows {t} or later",
+    "the payment is requested at or after {t}",
+    "the payment is recorded at {t} or after"
+   ],
+   "item": [
+    "time at or after {t}",
+    "from {t} on",
+    "submitted {t} or after",
+    "{t} or after",
+    "local time {t} or later",
+    "txn time at least {t}",
+    "{t} onward"
+   ]
+  },
+  "hour.night": {
+   "pre": [
+    "nocturnal"
+   ],
+   "post": [
+    "carried out after dark",
+    "submitted during hours of darkness",
+    "made while it is dark",
+    "made during the hours of darkness",
+    "placed after nightfall",
+    "submitted at night-time",
+    "done in the night hours",
+    "processed at night",
+    "made when it is dark outside"
+   ],
+   "clause": [
+    "it is after dark",
+    "the time falls at night",
+    "the payment is made after dark",
+    "the transaction happens after dark",
+    "it is during the hours of darkness",
+    "the payment is submitted at night",
+    "the txn is carried out after nightfall",
+    "it is the hours of darkness",
+    "the payment is processed at night",
+    "the transaction is placed at night",
+    "it falls during the night",
+    "the payment occurs after nightfall"
+   ],
+   "item": [
+    "after nightfall",
+    "during darkness",
+    "night-time payment",
+    "hours of darkness",
+    "at night time",
+    "dark hours"
+   ]
+  },
+  "rooted.yes": {
+   "pre": [
+    "root-enabled"
+   ],
+   "post": [
+    "from devices with root privileges",
+    "from handsets that are rooted",
+    "from devices running rooted firmware",
+    "from devices with superuser access",
+    "from phones that have been rooted",
+    "from jailbroken iOS devices",
+    "from rooted Android devices",
+    "from devices where root is present",
+    "from devices with a jailbreak in place",
+    "from handsets with root installed",
+    "from devices that have been jailbroken",
+    "originating from a rooted handset"
+   ],
+   "clause": [
+    "the handset is rooted or jailbroken",
+    "the device runs with root privileges",
+    "the phone has root privileges",
+    "the device shows root access",
+    "root access is present on the handset",
+    "superuser access is present on the device",
+    "the device is running rooted firmware",
+    "the device has a jailbreak in place",
+    "the handset carries root tooling",
+    "root is installed on the device",
+    "the phone is running a rooted build",
+    "the device is in a rooted state"
+   ],
+   "item": [
+    "handset rooted",
+    "root privileges present",
+    "root access on device",
+    "rooted firmware",
+    "device has root"
+   ]
+  },
+  "rooted.no": {
+   "pre": [
+    "non-root",
+    "non-jailbroken-handset"
+   ],
+   "post": [
+    "from handsets that are not rooted",
+    "from devices with no root privileges",
+    "from phones running stock firmware",
+    "from handsets that have not been jailbroken",
+    "from devices without superuser access",
+    "from phones with no jailbreak in place",
+    "from devices that have never been rooted",
+    "from stock iOS devices",
+    "from devices with no root installed",
+    "from handsets free of root access",
+    "from devices not running rooted firmware",
+    "from phones where root is absent"
+   ],
+   "clause": [
+    "the handset is free of root access",
+    "the device has no root privileges",
+    "the phone runs stock firmware",
+    "the handset has not been jailbroken",
+    "the device has no superuser access",
+    "there is no jailbreak in place on the device",
+    "the device has never been rooted",
+    "no root is present on the handset",
+    "root access is absent from the device",
+    "the device is not running rooted firmware",
+    "the phone is free of root tooling",
+    "the device is not in a rooted state"
+   ],
+   "item": [
+    "handset not rooted",
+    "no root privileges",
+    "stock firmware",
+    "not jailbroken handset",
+    "no superuser access",
+    "device never rooted",
+    "root absent"
+   ]
+  },
+  "whitelisted.yes": {
+   "pre": [
+    "pre-approved-merchant"
+   ],
+   "post": [
+    "to pre-approved merchants",
+    "to merchants on our approved list",
+    "to merchants that have been pre-approved",
+    "to merchants on the allowlist",
+    "to merchants listed on the whitelist",
+    "to merchants that are pre-approved",
+    "to merchants in our trusted register",
+    "to merchants recorded on the whitelist",
+    "to payees on the whitelist",
+    "to merchants who appear on the whitelist"
+   ],
+   "clause": [
+    "the merchant is pre-approved",
+    "the merchant is a pre-approved merchant",
+    "the merchant appears on the allowlist",
+    "the merchant is listed on the whitelist",
+    "the payee is on the whitelist",
+    "the merchant has been pre-approved",
+    "the merchant is on our approved list",
+    "the merchant is a whitelisted one",
+    "the payee is allowlisted",
+    "the merchant is on the trusted register",
+    "the merchant is recorded on the whitelist"
+   ],
+   "item": [
+    "pre-approved merchant",
+    "whitelisted payee",
+    "merchant pre-approved",
+    "allowlisted payee"
+   ]
+  },
+  "whitelisted.no": {
+   "pre": [
+    "non-approved"
+   ],
+   "post": [
+    "to merchants not on the allowlist",
+    "to merchants that are not pre-approved",
+    "to merchants not on our approved list",
+    "to merchants absent from the whitelist",
+    "to merchants without a whitelist entry",
+    "to merchants that have not been pre-approved",
+    "to merchants that are not allowlisted",
+    "to merchants who do not appear on the whitelist",
+    "to merchants outside our approved list",
+    "to payees not on the whitelist",
+    "to merchants with no allowlist entry",
+    "to merchants not in the trusted register"
+   ],
+   "clause": [
+    "the merchant is not pre-approved",
+    "the merchant is not on our approved list",
+    "the merchant is absent from the whitelist",
+    "the merchant has no whitelist entry",
+    "the merchant has not been pre-approved",
+    "the merchant does not appear on the whitelist",
+    "the payee is not on the whitelist",
+    "the merchant is outside our approved list",
+    "the merchant is not in the trusted register",
+    "the payee is not allowlisted",
+    "the merchant has no allowlist entry"
+   ],
+   "item": [
+    "merchant not pre-approved",
+    "merchant absent from whitelist",
+    "no whitelist entry",
+    "payee not allowlisted"
+   ]
+  },
+  "kyc.yes": {
+   "pre": [],
+   "post": [
+    "from users who have cleared KYC",
+    "from customers who passed their KYC checks",
+    "from users whose identity has been verified under KYC",
+    "from users with a completed KYC file",
+    "from customers with a finished KYC process",
+    "from users who have been KYC cleared",
+    "from users with KYC in place",
+    "from customers whose KYC checks are passed",
+    "from users who completed their KYC onboarding",
+    "from users onboarded with KYC done",
+    "from users with a KYC pass on file",
+    "from users whose KYC status is complete"
+   ],
+   "clause": [
+    "the user has cleared KYC",
+    "the customer has passed KYC checks",
+    "the user's identity is verified under KYC",
+    "KYC status is complete for the user",
+    "the user has completed KYC onboarding",
+    "the customer's KYC is in place",
+    "the user has a KYC pass on file",
+    "the account has passed KYC",
+    "the user is KYC cleared",
+    "KYC checks are complete for the user",
+    "the user has been onboarded with KYC done"
+   ],
+   "item": [
+    "KYC status complete",
+    "KYC onboarding done",
+    "passed KYC checks",
+    "KYC pass on file"
+   ]
+  },
+  "kyc.no": {
+   "pre": [
+    "KYC-outstanding",
+    "KYC-unfinished"
+   ],
+   "post": [
+    "from users whose KYC has not cleared",
+    "from customers who have not passed their KYC checks",
+    "from users with KYC still outstanding",
+    "from users whose identity is unverified under KYC",
+    "from users with an incomplete KYC file",
+    "from users not yet cleared under KYC",
+    "from customers with KYC unfinished",
+    "from users who have not completed KYC onboarding",
+    "from users with no KYC pass on file",
+    "from users with KYC status incomplete",
+    "from users who have yet to complete KYC"
+   ],
+   "clause": [
+    "the user has not cleared KYC",
+    "the customer has not passed KYC checks",
+    "KYC is still outstanding for the user",
+    "the user's identity is unverified under KYC",
+    "the KYC file is incomplete",
+    "the user is not yet cleared under KYC",
+    "KYC is unfinished for the customer",
+    "the user has not completed KYC onboarding",
+    "there is no KYC pass on file",
+    "KYC status is incomplete for the user",
+    "the user has yet to complete KYC",
+    "KYC is pending for the user",
+    "the account has no KYC pass on record"
+   ],
+   "item": [
+    "KYC outstanding",
+    "KYC incomplete",
+    "no KYC pass",
+    "KYC unfinished"
+   ]
+  },
+  "international.yes": {
+   "pre": [
+    "inter-border"
+   ],
+   "post": [
+    "to beneficiaries outside the home country",
+    "sent to a counterparty abroad",
+    "sent to an offshore counterparty",
+    "to a cross-border counterparty",
+    "crossing the national border",
+    "sent across national borders",
+    "to recipients in another country",
+    "routed to a foreign bank",
+    "that leave the country",
+    "to a beneficiary in another jurisdiction"
+   ],
+   "clause": [
+    "the payment crosses the national border",
+    "the counterparty is abroad",
+    "the beneficiary is in another country",
+    "the counterparty is offshore",
+    "the remittance is cross-border",
+    "the transfer goes to another country",
+    "the payment leaves the country",
+    "the payment is to a counterparty in another jurisdiction",
+    "the payer and payee are in different countries",
+    "the settlement crosses the border",
+    "the beneficiary is outside the country",
+    "the transfer is sent overseas"
+   ],
+   "item": [
+    "cross-border remittance",
+    "counterparty abroad",
+    "offshore counterparty",
+    "beneficiary abroad",
+    "leaves the country",
+    "outbound cross-border",
+    "payee in another country"
+   ]
+  },
+  "international.no": {
+   "pre": [
+    "onshore",
+    "home-country"
+   ],
+   "post": [
+    "to beneficiaries in the home country",
+    "to counterparties onshore",
+    "that stay within the home country",
+    "that remain inside the national border",
+    "where payer and payee are in the same country",
+    "to recipients in the same country",
+    "that do not leave the country",
+    "with a domestic counterparty",
+    "settled inside the country",
+    "that stay onshore",
+    "with payer and payee in one country",
+    "within the national border"
+   ],
+   "clause": [
+    "the payer and payee are in the same country",
+    "the counterparty is onshore",
+    "the beneficiary is in the home country",
+    "the payment stays inside the national border",
+    "the transfer does not leave the country",
+    "the counterparty is domestic",
+    "the payment does not cross the national border",
+    "the settlement stays onshore",
+    "the payment remains within the country",
+    "the beneficiary is domestic",
+    "the payer and payee share a country",
+    "the transfer is kept within the country"
+   ],
+   "item": [
+    "onshore counterparty",
+    "domestic counterparty",
+    "same-country transfer",
+    "stays in country",
+    "within national border",
+    "does not leave country",
+    "home-country beneficiary"
+   ]
+  },
+  "method.is": {
+   "pre": [
+    "{m}",
+    "{m}-channel"
+   ],
+   "post": [
+    "carried out by {m}",
+    "that use {m} as the method",
+    "whose method is {m}",
+    "with the method set to {m}",
+    "authorised over {m}",
+    "initiated by {m}",
+    "sent through the {m} channel",
+    "using the {m} method",
+    "taking place over {m}",
+    "conducted via {m}"
+   ],
+   "clause": [
+    "the recorded method is {m}",
+    "the payment is carried out by {m}",
+    "the payment is initiated through {m}",
+    "the method used is {m}",
+    "the instruction arrives by {m}",
+    "the transaction is settled via {m}",
+    "the payer uses {m}",
+    "the payment is sent through the {m} channel",
+    "the payment is authorised through {m}",
+    "the payment method used is {m}",
+    "the payer chose {m} as the method",
+    "the payment is conducted via {m}"
+   ],
+   "item": [
+    "method is {m}",
+    "{m} method",
+    "payment method {m}",
+    "carried by {m}",
+    "authorised through {m}"
+   ]
+  },
+  "method.is_not": {
+   "pre": [],
+   "post": [
+    "carried out by anything but {m}",
+    "not carried out by {m}",
+    "settled by a method other than {m}",
+    "authorised by something other than {m}",
+    "routed by a method that is not {m}",
+    "initiated with any method except {m}",
+    "sent by any channel but {m}",
+    "that do not use {m}",
+    "conducted by a method apart from {m}",
+    "that are not authorised through {m}",
+    "initiated through a channel other than {m}"
+   ],
+   "clause": [
+    "the payment is not carried out by {m}",
+    "the payer is not using {m}",
+    "the method is something other than {m}",
+    "the payment is initiated by a method other than {m}",
+    "the transaction is not settled via {m}",
+    "the method used is not {m}",
+    "the payment is not authorised through {m}",
+    "the payment does not use {m}",
+    "the payer chose a method other than {m}",
+    "the payment is conducted by a channel other than {m}",
+    "the payment is settled through a method other than {m}",
+    "the instruction is not sent by {m}"
+   ],
+   "item": [
+    "method other than {m}",
+    "not carried by {m}",
+    "anything except {m}",
+    "not authorised by {m}",
+    "not via {m} method",
+    "channel not {m}",
+    "any method but {m}"
+   ]
+  },
+  "method.in": {
+   "pre": [],
+   "post": [
+    "carried out by any of {m}",
+    "settled by any of {m}",
+    "authorised through any of {m}",
+    "using any of {m}",
+    "whose method is any of {m}",
+    "initiated by any of {m}",
+    "sent by any of {m}",
+    "routed through any of {m}",
+    "conducted over any of {m}",
+    "with any of the methods {m}",
+    "made via any of {m}",
+    "placed with any of {m}"
+   ],
+   "clause": [
+    "the payment is carried out by any of {m}",
+    "the payer uses any of {m}",
+    "the method is any of {m}",
+    "the payment is settled through any of {m}",
+    "the payment is initiated by any of {m}",
+    "the method used is among {m}",
+    "the payment is authorised through any of {m}",
+    "the instruction is sent by any of {m}",
+    "the payer chose one of {m}",
+    "the payment is routed through any of {m}",
+    "the payment is conducted via any of {m}",
+    "the payment method is among {m}"
+   ],
+   "item": [
+    "any of {m}",
+    "method among {m}",
+    "method in {m}",
+    "carried by any of {m}",
+    "settled via any of {m}",
+    "method is any of {m}",
+    "placed with any of {m}"
+   ]
+  },
+  "method.not_in": {
+   "pre": [],
+   "post": [
+    "carried out by none of {m}",
+    "settled by none of {m}",
+    "authorised through none of {m}",
+    "using none of {m}",
+    "whose method is none of {m}",
+    "initiated by none of {m}",
+    "sent by none of {m}",
+    "routed through none of {m}",
+    "conducted over none of {m}",
+    "with none of the methods {m}",
+    "made via none of {m}",
+    "placed with none of {m}"
+   ],
+   "clause": [
+    "the payment is carried out by none of {m}",
+    "the payer uses none of {m}",
+    "the method is none of {m}",
+    "the payment is settled through none of {m}",
+    "the payment is initiated by none of {m}",
+    "the method used is not among {m}",
+    "the payment is authorised through none of {m}",
+    "the instruction is sent by none of {m}",
+    "the payer chose none of {m}",
+    "the payment is routed through none of {m}",
+    "the payment is conducted via none of {m}",
+    "the payment method is not among {m}"
+   ],
+   "item": [
+    "method not among {m}",
+    "settled via none of {m}",
+    "carried by none of {m}",
+    "method is none of {m}",
+    "placed with none of {m}"
+   ]
+  },
+  "category.is": {
+   "pre": [
+    "{c}-trade"
+   ],
+   "post": [
+    "to merchants in the {c} sector",
+    "to merchants trading in {c}",
+    "with merchants classed as {c}",
+    "to {c} sellers",
+    "at merchants operating in {c}",
+    "to businesses classed as {c}",
+    "with a {c} merchant",
+    "to the {c} trade",
+    "where the merchant is classed as {c}",
+    "to a {c} merchant"
+   ],
+   "clause": [
+    "the merchant trades in {c}",
+    "the seller is in the {c} category",
+    "the merchant sector is {c}",
+    "the payee is a {c} merchant",
+    "the business is classed as {c}",
+    "the vendor is in {c}",
+    "the merchant is a {c} business",
+    "the payee's category is {c}",
+    "the seller falls in {c}"
+   ],
+   "item": [
+    "sector {c}",
+    "merchant classed {c}",
+    "{c} trade",
+    "{c} seller",
+    "merchant category {c}",
+    "{c} business",
+    "merchant trading in {c}"
+   ]
+  },
+  "category.is_not": {
+   "pre": [],
+   "post": [
+    "to merchants classed other than {c}",
+    "to merchants that do not trade in {c}",
+    "to merchants not classed as {c}",
+    "to sellers outside {c}",
+    "to businesses that are not {c}",
+    "to merchants whose sector is not {c}",
+    "to non-{c} sellers",
+    "to merchants operating outside {c}",
+    "to a merchant not in the {c} category",
+    "to payees outside the {c} sector",
+    "to a business not classed as {c}",
+    "to any merchant except {c}"
+   ],
+   "clause": [
+    "the merchant is not classed as {c}",
+    "the merchant does not trade in {c}",
+    "the merchant's category is other than {c}",
+    "the seller is outside {c}",
+    "the business is not classed as {c}",
+    "the merchant sector is not {c}",
+    "the payee is not a {c} merchant",
+    "the vendor is not in {c}",
+    "the merchant operates outside {c}",
+    "the merchant is not in the {c} sector",
+    "the payee's category is not {c}",
+    "the seller is not in {c}"
+   ],
+   "item": [
+    "sector other than {c}",
+    "not a {c} merchant",
+    "merchant not classed {c}",
+    "outside {c} sector",
+    "non-{c} seller",
+    "merchant trading outside {c}"
+   ]
+  },
+  "category.in": {
+   "pre": [],
+   "post": [
+    "to merchants classed as any of {c}",
+    "to sellers in any of {c}",
+    "at merchants trading in any of {c}",
+    "to businesses in any of {c}",
+    "with merchants in any of {c}",
+    "to payees classed under any of {c}",
+    "to merchants whose sector is any of {c}",
+    "to vendors in any of {c}",
+    "spent at any of {c}",
+    "at a merchant in any of {c}",
+    "to businesses classed among {c}"
+   ],
+   "clause": [
+    "the merchant is classed as any of {c}",
+    "the seller is in any of {c}",
+    "the merchant trades in any of {c}",
+    "the business is in any of {c}",
+    "the merchant's sector is among {c}",
+    "the payee is classed under any of {c}",
+    "the vendor belongs to any of {c}",
+    "the merchant's category is any of {c}",
+    "the merchant operates in any of {c}",
+    "the payee's category is among {c}",
+    "the business is classed among {c}",
+    "the merchant falls in any of {c}"
+   ],
+   "item": [
+    "any of {c}",
+    "sector among {c}",
+    "merchant in any of {c}",
+    "trading in any of {c}",
+    "category among {c}",
+    "business in any of {c}",
+    "vendor in any of {c}"
+   ]
+  },
+  "category.not_in": {
+   "pre": [],
+   "post": [
+    "to merchants classed as none of {c}",
+    "to sellers in none of {c}",
+    "at merchants trading in none of {c}",
+    "to businesses in none of {c}",
+    "with merchants in none of {c}",
+    "to payees classed under none of {c}",
+    "to merchants whose sector is none of {c}",
+    "to vendors in none of {c}",
+    "spent at merchants in none of {c}",
+    "at a merchant in none of {c}",
+    "to businesses classed as none of {c}"
+   ],
+   "clause": [
+    "the merchant is classed as none of {c}",
+    "the seller is in none of {c}",
+    "the merchant trades in none of {c}",
+    "the business is in none of {c}",
+    "the merchant's sector is not among {c}",
+    "the payee is classed under none of {c}",
+    "the vendor belongs to none of {c}",
+    "the merchant operates in none of {c}",
+    "the payee's category is not among {c}",
+    "the business is classed as none of {c}",
+    "the merchant falls in none of {c}"
+   ],
+   "item": [
+    "none of {c}",
+    "sector not among {c}",
+    "merchant in none of {c}",
+    "trading in none of {c}",
+    "category not among {c}",
+    "business in none of {c}",
+    "vendor in none of {c}"
+   ]
+  }
+ },
+ "actor": {
+  "people": [
+   "shoppers",
+   "cardholders",
+   "payers",
+   "wallet holders",
+   "members"
+  ],
+  "generic_does": [
+   "make purchases",
+   "send remittances",
+   "settle payments",
+   "remit funds",
+   "make transfers"
+  ],
+  "frames": {
+   "BLOCK": [
+    "{Who} are forbidden to {does}.",
+    "{Who} shall not {does}.",
+    "{Who} are not to {does}.",
+    "{Who} have no permission to {does}.",
+    "{Who} do not have permission to {does}.",
+    "{Who} must not be allowed to {does}.",
+    "{Who} are not entitled to {does}.",
+    "{Who} are denied the right to {does}.",
+    "Do not permit {who} to {does}.",
+    "Under no circumstances may {who} {does}.",
+    "{Who} may never {does}.",
+    "{Who} are forbidden to {does}."
+   ],
+   "ALLOW": [
+    "{Who} are permitted to {does}.",
+    "{Who} have permission to {does}.",
+    "{Who} are authorised to {does}.",
+    "{Who} are entitled to {does}.",
+    "There is no objection if {who} {does}.",
+    "{Who} are not restricted and may {does}.",
+    "{Who} may {does} without restriction.",
+    "{Who} are cleared to {does}.",
+    "Permit {who} to {does}."
+   ],
+   "REVIEW": [
+    "If {who} {does}, do not auto-decide; someone should check.",
+    "When {who} {does}, refer to compliance.",
+    "Refer it to compliance if {who} {does}.",
+    "{Who} must be referred to compliance if they {does}.",
+    "Open a case when {who} {does}.",
+    "Surface it to the ops team if {who} {does}.",
+    "If {who} try to {does}, escalate to the risk desk.",
+    "{Who} trying to {does} must be held pending review.",
+    "Someone should check whenever {who} {does}.",
+    "Do not auto-decide when {who} {does}; someone should check."
+   ]
+  },
+  "only": [
+   "Only {who} are permitted to {does}.",
+   "Solely {who} can {does}.",
+   "Only {who} have permission to {does}.",
+   "Just {who} may {does}.",
+   "Nobody except {who} can {does}.",
+   "Only {who} are authorised to {does}.",
+   "We only permit {who} to {does}."
+  ],
+  "everyone": {
+   "BLOCK": [
+    "Nobody can {does}.",
+    "Nobody is permitted to {does}.",
+    "Not one customer may {does}.",
+    "No account holder can {does}."
+   ],
+   "ALLOW": [
+    "Anyone is permitted to {does}.",
+    "Everyone can {does}.",
+    "Any customer may {does}.",
+    "Anybody can {does}.",
+    "Any account holder is allowed to {does}."
+   ],
+   "REVIEW": [
+    "If anybody tries to {does}, refer it to compliance.",
+    "Whenever a customer tries to {does}, open a case.",
+    "Anyone who tries to {does} should be checked by someone.",
+    "Someone should check whenever anyone tries to {does}."
+   ]
+  },
+  "who": {
+   "kyc.yes": [
+    "users who have cleared KYC",
+    "KYC-cleared users",
+    "customers whose KYC is complete"
+   ],
+   "kyc.no": [
+    "users who have not cleared KYC",
+    "customers with KYC still outstanding",
+    "customers who have not passed their KYC checks"
+   ],
+   "account_age.gt": [
+    "accounts open for more than {v}",
+    "customers whose accounts have been open over {v}"
+   ],
+   "account_age.gte": [
+    "accounts open for at least {v}",
+    "users whose accounts are at least {v} old"
+   ],
+   "account_age.lt": [
+    "accounts open for less than {v}",
+    "customers whose accounts have been open less than {v}"
+   ],
+   "account_age.lte": [
+    "accounts open for {v} or less",
+    "customers whose accounts have been open for no more than {v}"
+   ],
+   "account_age.new": [
+    "accounts with no prior history",
+    "customers with first-time accounts",
+    "users with no account history with us"
+   ],
+   "device_age.gt": [
+    "devices in use for more than {v}",
+    "customers on devices known for over {v}"
+   ],
+   "device_age.gte": [
+    "devices known for at least {v}",
+    "customers on devices in use for {v} or more"
+   ],
+   "device_age.lt": [
+    "devices in use for less than {v}",
+    "customers on devices first recorded less than {v} ago"
+   ],
+   "device_age.lte": [
+    "devices in use for {v} or less",
+    "customers on devices known for no more than {v}"
+   ],
+   "device_age.new": [
+    "customers on devices with no prior history",
+    "users on unseen devices"
+   ],
+   "rooted.yes": [
+    "users with root-enabled handsets",
+    "customers on rooted handsets"
+   ],
+   "rooted.no": [
+    "users on stock-firmware handsets",
+    "customers with no root access on their devices"
+   ],
+   "failed.gt": [
+    "users with more than {n} unsuccessful attempts in 24 hours",
+    "customers with over {n} failed tries in one day"
+   ],
+   "failed.gte": [
+    "users with {n} or more unsuccessful attempts in 24 hours",
+    "customers with at least {n} failed tries in one day"
+   ],
+   "failed.lt": [
+    "users with fewer than {n} unsuccessful attempts in 24 hours",
+    "customers with under {n} failed tries in one day"
+   ],
+   "failed.lte": [
+    "users with at most {n} unsuccessful attempts in 24 hours",
+    "customers with no more than {n} failed tries in one day"
+   ],
+   "failed.none": [
+    "users with no failed attempts in one day",
+    "customers with no unsuccessful attempts in 24 hours"
+   ],
+   "velocity.gt": [
+    "users who placed more than {n} payments in one hour",
+    "customers who sent over {n} payments in an hour"
+   ],
+   "velocity.gte": [
+    "users who placed {n} or more payments in one hour",
+    "customers who sent at least {n} payments in an hour"
+   ],
+   "velocity.lt": [
+    "users who placed fewer than {n} payments in one hour",
+    "customers who sent under {n} payments in an hour"
+   ],
+   "velocity.lte": [
+    "users who placed {n} or fewer payments in one hour",
+    "customers who sent up to {n} payments in an hour"
+   ]
+  },
+  "with": {
+   "kyc.yes": [
+    "with KYC cleared",
+    "who have passed KYC checks"
+   ],
+   "kyc.no": [
+    "without a KYC pass",
+    "who have not cleared KYC"
+   ],
+   "account_age.gt": [
+    "whose accounts have been open for more than {v}",
+    "with accounts open for over {v}"
+   ],
+   "account_age.gte": [
+    "whose accounts have been open for at least {v}",
+    "with accounts open {v} or longer"
+   ],
+   "account_age.lt": [
+    "whose accounts have been open less than {v}",
+    "with accounts open for under {v}"
+   ],
+   "account_age.lte": [
+    "whose accounts have been open {v} or less",
+    "with accounts open no longer than {v}"
+   ],
+   "account_age.new": [
+    "with a first-time account",
+    "whose account has no history"
+   ],
+   "device_age.gt": [
+    "on devices in use for more than {v}",
+    "using handsets known for over {v}"
+   ],
+   "device_age.gte": [
+    "on devices known for at least {v}",
+    "using handsets in use {v} or longer"
+   ],
+   "device_age.lt": [
+    "on devices in use for less than {v}",
+    "using handsets first recorded less than {v} ago"
+   ],
+   "device_age.lte": [
+    "on devices known for {v} or less",
+    "using handsets in use for at most {v}"
+   ],
+   "device_age.new": [
+    "on a device with no prior history",
+    "using a device we have never seen"
+   ],
+   "rooted.yes": [
+    "on root-enabled handsets",
+    "using rooted handsets"
+   ],
+   "rooted.no": [
+    "on stock-firmware handsets",
+    "using handsets with no root access"
+   ],
+   "failed.gt": [
+    "with over {n} unsuccessful attempts in 24 hours",
+    "who had more than {n} failed tries in one day"
+   ],
+   "failed.gte": [
+    "with {n} or more unsuccessful attempts in one day",
+    "who had at least {n} failed tries in 24 hours"
+   ],
+   "failed.lt": [
+    "with fewer than {n} unsuccessful attempts in one day",
+    "who had under {n} failed tries in 24 hours"
+   ],
+   "failed.lte": [
+    "with at most {n} unsuccessful attempts in one day",
+    "who had no more than {n} failed tries in 24 hours"
+   ],
+   "failed.none": [
+    "with no unsuccessful attempts in one day",
+    "who have had zero failed tries in 24 hours"
+   ],
+   "velocity.gt": [
+    "who placed more than {n} payments in one hour",
+    "with over {n} payments in an hour"
+   ],
+   "velocity.gte": [
+    "who placed {n} or more payments in an hour",
+    "with at least {n} payments in one hour"
+   ],
+   "velocity.lt": [
+    "who placed fewer than {n} payments in an hour",
+    "with under {n} payments in one hour"
+   ],
+   "velocity.lte": [
+    "who placed {n} or fewer payments in an hour",
+    "with at most {n} payments in one hour"
+   ]
+  },
+  "does": {
+   "amount.gt": [
+    "pay in excess of {v}",
+    "send a sum over {v}",
+    "make purchases above {v}"
+   ],
+   "amount.gte": [
+    "pay {v} or greater",
+    "send at least {v}",
+    "settle sums of {v} or more"
+   ],
+   "amount.lt": [
+    "pay under {v}",
+    "send less than {v}",
+    "make purchases below {v}"
+   ],
+   "amount.lte": [
+    "pay {v} or under",
+    "send at most {v}",
+    "settle amounts up to {v}"
+   ],
+   "amount.eq": [
+    "pay {v} exactly",
+    "send exactly {v}",
+    "remit exactly {v}"
+   ],
+   "international.yes": [
+    "send remittances abroad",
+    "make cross-border transfers",
+    "pay to offshore counterparties"
+   ],
+   "international.no": [
+    "send remittances domestically",
+    "make in-country transfers",
+    "pay onshore counterparties"
+   ],
+   "method.is": [
+    "pay by {m}",
+    "remit by {m}",
+    "pay through {m}"
+   ],
+   "method.is_not": [
+    "pay by something other than {m}",
+    "remit by any channel but {m}",
+    "settle through anything except {m}"
+   ],
+   "method.in": [
+    "pay by any of {m}",
+    "remit through any of {m}",
+    "settle via any of {m}"
+   ],
+   "method.not_in": [
+    "pay by none of {m}",
+    "remit through none of {m}",
+    "settle via none of {m}"
+   ],
+   "category.is": [
+    "buy from {c} merchants",
+    "spend at {c} merchants",
+    "pay {c} sellers"
+   ],
+   "category.is_not": [
+    "buy from merchants outside {c}",
+    "spend at merchants not classed as {c}",
+    "pay sellers outside {c}"
+   ],
+   "category.in": [
+    "buy from merchants in any of {c}",
+    "spend at any of {c}",
+    "pay sellers in any of {c}"
+   ],
+   "category.not_in": [
+    "buy from merchants in none of {c}",
+    "spend at none of {c}",
+    "pay sellers in none of {c}"
+   ],
+   "whitelisted.yes": [
+    "pay allowlisted merchants",
+    "pay pre-approved merchants",
+    "settle with approved merchants",
+    "pay merchants on our approved list"
+   ],
+   "whitelisted.no": [
+    "pay unapproved merchants",
+    "pay merchants not on the allowlist",
+    "pay non-allowlisted merchants"
+   ],
+   "hour.before": [
+    "remit before {t}",
+    "settle payments before {t}",
+    "pay before {t} local time"
+   ],
+   "hour.from": [
+    "settle from {t} onwards",
+    "remit at or after {t}",
+    "pay at or after {t}"
+   ],
+   "hour.night": [
+    "remit at night",
+    "settle payments after dark",
+    "pay after nightfall"
+   ],
+   "hour.between": [
+    "remit between {a} and {b}",
+    "settle between {a} and {b}",
+    "pay from {a} until {b}",
+    "settle from {a} until {b}"
+   ]
+  }
+ }
+}

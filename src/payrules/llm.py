@@ -1,6 +1,7 @@
 """Shared model code: prompt format, loading, batched generation and evaluation."""
 
 import json
+import os
 from collections import defaultdict
 from pathlib import Path
 
@@ -11,7 +12,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from .pairs import score_candidate
 from .parser import parse
 
-BASE_MODEL = "HuggingFaceTB/SmolLM2-135M-instruct"
+BASE_MODEL = os.environ.get("PAYRULES_BASE_MODEL", "HuggingFaceTB/SmolLM2-135M-instruct")
 LORA_TARGETS = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 MAX_NEW_TOKENS = 110
 
@@ -33,8 +34,8 @@ def load_tokenizer():
     return tokenizer
 
 
-def load_base(device: str = "cuda"):
-    model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, dtype=torch.float16)
+def load_base(device: str = "cuda", name: str = BASE_MODEL):
+    model = AutoModelForCausalLM.from_pretrained(name, dtype=torch.float16)
     return model.to(device)
 
 
@@ -50,7 +51,10 @@ def new_lora_model(device: str = "cuda", rank: int = 32):
 
 
 def load_lora_model(path: Path | str, device: str = "cuda", trainable: bool = False):
-    return PeftModel.from_pretrained(load_base(device), str(path), is_trainable=trainable)
+    """Loads onto the base model the checkpoint was trained on, so sizes can be mixed."""
+    config = json.loads((Path(path) / "adapter_config.json").read_text(encoding="utf-8"))
+    base = load_base(device, config["base_model_name_or_path"])
+    return PeftModel.from_pretrained(base, str(path), is_trainable=trainable)
 
 
 @torch.inference_mode()
