@@ -38,6 +38,8 @@ def main() -> None:
     parser.add_argument("--log", type=Path, default=Path("runs/reward.jsonl"))
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--synthetic-pairs", type=int, default=1500)
+    parser.add_argument("--mined", nargs="+", default=["mined"],
+                        help="Tags of mined pair files (pairs_{tag}_rl_train.jsonl and _rl_val.jsonl)")
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--head-lr", type=float, default=1e-3)
@@ -54,9 +56,10 @@ def main() -> None:
     # Mostly RL phrasing and the policy's real mistakes, with some SFT-phrasing pairs for variety.
     train_pairs = read_jsonl(args.data / "pairs_train.jsonl")[: args.synthetic_pairs]
     train_pairs += read_jsonl(args.data / "pairs_rl_train.jsonl")
-    train_pairs += read_jsonl(args.data / "pairs_mined_rl_train.jsonl")
     val_pairs = read_jsonl(args.data / "pairs_rl_val.jsonl")
-    val_pairs += read_jsonl(args.data / "pairs_mined_rl_val.jsonl")
+    for tag in args.mined:
+        train_pairs += read_jsonl(args.data / f"pairs_{tag}_rl_train.jsonl")
+        val_pairs += read_jsonl(args.data / f"pairs_{tag}_rl_val.jsonl")
     print(f"{len(train_pairs)} train pairs, {len(val_pairs)} val pairs", flush=True)
 
     backbone_params = [p for p in model.backbone.parameters() if p.requires_grad]

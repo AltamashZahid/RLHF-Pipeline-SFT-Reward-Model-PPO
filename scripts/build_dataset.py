@@ -46,19 +46,27 @@ def main() -> None:
     args = parser.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
-    rng = random.Random(args.seed)
+
+    def rng_for(*name: str) -> random.Random:
+        return random.Random(":".join((str(args.seed), *name)))
+
+    # Every split has its own generator and the held-out splits are drawn first, so editing
+    # the training phrasings can never change what the evaluation splits contain.
+    plan = (
+        ("test_new_phrasing", args.test, True),
+        ("rl_train", args.rl_train, "rl"),
+        ("rl_val", args.rl_val, "rl"),
+        ("train", args.train, False),
+        ("val", args.val, False),
+        # Unseen rules in the RL phrasing. rl_val picks PPO checkpoints, so it overstates PPO;
+        # this set is scored once, next to test_new_phrasing. Drawn last, so nothing above changes.
+        ("test_rl_phrasing", args.test, "rl"),
+    )
     seen: set[str] = set()
-    splits = {
-        "train": generate(args.train, rng, False, seen),
-        "val": generate(args.val, rng, False, seen),
-        "test_new_phrasing": generate(args.test, rng, True, seen),
-    }
-    # A separate generator, so adding RL data cannot change the splits above.
-    rl_rng = random.Random(args.seed + 1)
-    splits["rl_train"] = generate(args.rl_train, rl_rng, "rl", seen)
-    splits["rl_val"] = generate(args.rl_val, rl_rng, "rl", seen)
+    splits = {name: generate(count, rng_for(name), style, seen) for name, count, style in plan}
 
     for name, examples in splits.items():
+        rng = rng_for("pairs", name)
         write_jsonl(args.out / f"sft_{name}.jsonl", [
             {
                 "id": f"{name}-{i}",

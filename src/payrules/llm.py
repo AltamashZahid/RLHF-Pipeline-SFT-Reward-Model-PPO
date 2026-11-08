@@ -58,7 +58,7 @@ def generate_rules(
     model,
     tokenizer,
     requests: list[str],
-    batch_size: int = 16,
+    batch_size: int = 64,
     max_new_tokens: int = MAX_NEW_TOKENS,
 ) -> list[str]:
     """Greedy generation. Sorted by length so batches carry little padding."""
@@ -91,7 +91,7 @@ def sample_responses(
     model,
     tokenizer,
     requests: list[str],
-    batch_size: int = 16,
+    batch_size: int = 64,
     temperature: float = 1.0,
     max_new_tokens: int = MAX_NEW_TOKENS,
 ) -> list[list[int]]:
@@ -126,7 +126,7 @@ def decode_response(tokenizer, response: list[int]) -> str:
     return tokenizer.decode(response, skip_special_tokens=True).split("\n")[0].strip()
 
 
-def evaluate(model, tokenizer, rows: list[dict], batch_size: int = 16) -> dict:
+def evaluate(model, tokenizer, rows: list[dict], batch_size: int = 64) -> dict:
     """Parse, type-check and semantic rates. `rows` need "prompt", "rule" and "clauses"."""
     predictions = generate_rules(model, tokenizer, [r["prompt"] for r in rows], batch_size)
     totals = {"parses": 0, "type_checks": 0, "semantic_match": 0}

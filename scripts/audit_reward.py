@@ -9,7 +9,10 @@ import json
 import random
 import re
 import time
+from collections import defaultdict
 from dataclasses import replace
+
+import torch
 
 from payrules.llm import decode_response, load_lora_model, load_tokenizer, read_jsonl, sample_responses
 from payrules.nodes import format_rule
@@ -45,6 +48,7 @@ def main() -> None:
     args = parser.parse_args()
 
     rng = random.Random(args.seed)
+    torch.manual_seed(args.seed)
     tokenizer = load_tokenizer()
     rows = read_jsonl(args.rows)[: args.count]
     prompts = [r["prompt"] for r in rows]
@@ -90,6 +94,22 @@ def main() -> None:
         [s for s, m in zip(scores(samples_prompts, [neutral(t) for t in samples_text]), samples_match) if not m],
     )
 
+    # Bradley-Terry training only fixes score differences within one request, so the AUCs above,
+    # which compare scores across requests, understate the signal PPO gets: its value head
+    # absorbs each request's offset. Within one request is the comparison PPO relies on.
+    gold_by_prompt = dict(zip(prompts, golds))
+    wrong_prompts = [p for p, m in zip(samples_prompts, samples_match) if not m]
+    if wrong_prompts:
+        gold_side = scores(wrong_prompts, [gold_by_prompt[p] for p in wrong_prompts])
+        results["gold_beats_wrong_sample_same_request"] = rate([g > b for g, b in zip(gold_side, bad)])
+    by_prompt: dict[str, tuple[list[float], list[float]]] = defaultdict(lambda: ([], []))
+    for prompt, score, match in zip(samples_prompts, sample_scores, samples_match):
+        by_prompt[prompt][0 if match else 1].append(score)
+    within = [(r > w) + 0.5 * (r == w) for right, wrong in by_prompt.values() for r in right for w in wrong]
+    if within:
+        results["correct_beats_wrong_sample_same_request"] = sum(within) / len(within)
+        results["requests_with_correct_and_wrong_samples"] = sum(1 for r, w in by_prompt.values() if r and w)
+
     # 2. Gold against a one-edit mutant, with the reason text carrying no information.
     mutant_prompts, gold_neutral, mutant_neutral = [], [], []
     for row in rows:
@@ -110,13 +130,12 @@ def main() -> None:
     results["right_rule_beats_rule_for_other_request"] = rate([r > w for r, w in zip(right, wrong)])
 
     # 4. Does it just favour gold over an equally correct rewrite from the policy?
-    gold_for_samples = dict(zip(prompts, golds))
     correct_prompts = [p for p, m in zip(samples_prompts, samples_match) if m]
     correct_texts = [t for t, m in zip(samples_text, samples_match) if m]
     if correct_prompts:
         results["correct_sample_mean_score"] = sum(scores(correct_prompts, correct_texts)) / len(correct_prompts)
         results["gold_mean_score_same_prompts"] = (
-            sum(scores(correct_prompts, [gold_for_samples[p] for p in correct_prompts])) / len(correct_prompts)
+            sum(scores(correct_prompts, [gold_by_prompt[p] for p in correct_prompts])) / len(correct_prompts)
         )
     if bad:
         results["wrong_sample_mean_score"] = sum(bad) / len(bad)

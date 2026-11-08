@@ -7,6 +7,7 @@ test sets into validation sets and make the reported numbers unreliable.
 import argparse
 import json
 import random
+from collections import defaultdict
 from pathlib import Path
 
 import torch
@@ -15,6 +16,7 @@ from payrules.engine import compile_expr
 from payrules.llm import generate_rules, load_lora_model, load_tokenizer, read_jsonl
 from payrules.pairs import score_candidate
 from payrules.parser import parse
+from payrules.reward import RewardModel
 from payrules.txngen import generate_transactions
 
 
@@ -73,20 +75,46 @@ def score_set(model, tokenizer, rows, txns):
     }, matches, predictions
 
 
+def reward_pair_accuracy(reward, pairs, batch_size=8) -> dict:
+    """How often the reward model ranks the correct rule above the incorrect one, by pair kind."""
+    if not pairs:
+        return {"overall": None, "count": 0}
+    prompts = [p["prompt"] for p in pairs]
+    chosen = reward.score(prompts, [p["chosen"] for p in pairs], batch_size=batch_size).tolist()
+    rejected = reward.score(prompts, [p["rejected"] for p in pairs], batch_size=batch_size).tolist()
+    wins = defaultdict(lambda: [0, 0])
+    for pair, c, r in zip(pairs, chosen, rejected):
+        wins[pair["kind"]][0] += c > r
+        wins[pair["kind"]][1] += 1
+    won = sum(v[0] for v in wins.values())
+    total = sum(v[1] for v in wins.values())
+    return {"overall": won / total, "count": total, **{k: v[0] / v[1] for k, v in sorted(wins.items())}}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", default=["sft=checkpoints/sft", "ppo=checkpoints/ppo_learned"])
     parser.add_argument("--baseline", default="sft")
     parser.add_argument("--out", type=Path, default=Path("runs/final_eval.json"))
     parser.add_argument("--txns", type=int, default=2000)
+    parser.add_argument("--reward-model", default="checkpoints/reward")
+    parser.add_argument("--new-phrasing", default="data/sft_test_new_phrasing.jsonl")
+    parser.add_argument("--set-name", default="new_phrasing", help="Results name for the --new-phrasing set")
+    parser.add_argument("--handwritten", default="eval/handwritten.jsonl")
+    parser.add_argument("--pairs", default="data/pairs_test_new_phrasing.jsonl")
+    parser.add_argument("--limit", type=int, default=0, help="Use only the first rows; for smoke tests on validation data")
     args = parser.parse_args()
 
     tokenizer = load_tokenizer()
     txns = generate_transactions(args.txns, seed=999)
     sets = {
-        "new_phrasing": read_jsonl("data/sft_test_new_phrasing.jsonl"),
-        "handwritten": read_jsonl("eval/handwritten.jsonl"),
+        args.set_name: read_jsonl(args.new_phrasing),
+        "handwritten": read_jsonl(args.handwritten),
     }
+    pairs = read_jsonl(args.pairs)
+    if args.limit:
+        sets = {name: rows[: args.limit] for name, rows in sets.items()}
+        pairs = pairs[: args.limit]
 
     results: dict = {}
     matches_by_model: dict = {}
@@ -120,8 +148,27 @@ def main() -> None:
             print(f"{name} vs {args.baseline} on {set_name}:",
                   json.dumps(comparisons[f"{name}_vs_{args.baseline}_{set_name}"]), flush=True)
 
+    # The baseline's real mistakes on unseen requests are harder than synthetic corruptions.
+    real_mistakes = []
+    for row, text, matched in zip(
+        sets[args.set_name],
+        results[args.baseline][f"{args.set_name}_predictions"],
+        matches_by_model[args.baseline][args.set_name],
+    ):
+        if not matched:
+            real_mistakes.append({"prompt": row["prompt"], "chosen": row["rule"], "rejected": text, "kind": "real_mistake"})
+    reward = RewardModel.load(args.reward_model, tokenizer).eval()
+    reward_results = {
+        "synthetic_pairs": reward_pair_accuracy(reward, pairs),
+        "real_mistake_pairs": reward_pair_accuracy(reward, real_mistakes),
+    }
+    print("reward", json.dumps(reward_results), flush=True)
+
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps({"results": results, "comparisons": comparisons}, indent=1), encoding="utf-8")
+    args.out.write_text(
+        json.dumps({"results": results, "comparisons": comparisons, "reward": reward_results}, indent=1),
+        encoding="utf-8",
+    )
 
 
 if __name__ == "__main__":

@@ -109,6 +109,7 @@ class RunningStd:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sft", type=Path, default=Path("checkpoints/sft"))
+    parser.add_argument("--init", type=Path, default=None, help="Continue from this policy; the KL reference stays SFT")
     parser.add_argument("--reward-model", type=Path, default=Path("checkpoints/reward"))
     parser.add_argument("--reward", choices=("learned", "verifier"), default="learned")
     parser.add_argument("--data", type=Path, default=Path("data"))
@@ -134,7 +135,7 @@ def main() -> None:
     torch.manual_seed(args.seed)
 
     tokenizer = load_tokenizer()
-    policy = load_lora_model(args.sft, trainable=True)
+    policy = load_lora_model(args.init or args.sft, trainable=True)
     reference = load_lora_model(args.sft).eval()
     for parameter in reference.parameters():
         parameter.requires_grad_(False)
