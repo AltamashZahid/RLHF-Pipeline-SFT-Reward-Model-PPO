@@ -50,6 +50,9 @@ _FIELDS = (
     "device.is_rooted", "merchant.category", "merchant.whitelisted", "user.account_age_days",
     "user.failed_attempts_24h", "user.kyc_verified",
 )
+_EXTRA_FIELDS = ("txn.is_vpn", "txn.high_risk_country", "card.is_prepaid", "card.country_mismatch",
+                 "user.disposable_email", "ip.cards_24h")
+_IP_CARDS = (2, 3, 4, 5, 6, 8, 10, 15, 20)
 _BETWEEN = {
     "pre": [],
     "post": ["between {a} and {b}", "from {a} to {b}", "{a} to {b}", "during {a} to {b}"],
@@ -246,6 +249,18 @@ def sample_atom(rng: random.Random, field: str, extended: bool = False) -> Natur
             return _enum_atom(rng, field, "method", _METHOD_WORDS, "m", "method")
         case "merchant.category":
             return _enum_atom(rng, field, "category", _CATEGORY_WORDS, "c", "merchant")
+        case "txn.is_vpn":
+            return _bool_atom(rng, field, "vpn", ("vpn", "no_vpn"))
+        case "txn.high_risk_country":
+            return _bool_atom(rng, field, "risk_country", ("risky_country", "safe_country"))
+        case "card.is_prepaid":
+            return _bool_atom(rng, field, "prepaid", ("prepaid_card", "not_prepaid"))
+        case "card.country_mismatch":
+            return _bool_atom(rng, field, "mismatch", ("country_mismatch", "country_match"))
+        case "user.disposable_email":
+            return _bool_atom(rng, field, "disposable_email", ("disposable_email", "real_email"))
+        case "ip.cards_24h":
+            return _numeric(rng, field, "ip_cards", _IP_CARDS, lambda r, n: {"n": count_text(r, n)}, "ip_cards")
     raise ValueError(f"unknown field {field}")
 
 
@@ -258,10 +273,22 @@ class WordingPool:
     actor: dict | None = None  # Wording for sentences about a kind of user. Turns on the wider grammar.
 
     @classmethod
-    def load(cls, name: str) -> "WordingPool":
+    def load(cls, name: str, extra_fields: str | None = None) -> "WordingPool":
+        """`extra_fields` names a file of wording for the newer fields. Without it, a pool generates
+        only the older fields, with exactly the older draws."""
         data = json.loads((POOLS / f"{name}.json").read_text(encoding="utf-8"))
         concepts = {"hour.between": _BETWEEN, **_EXACT, **data["concepts"]}
-        return cls(data["nouns"], data["heads"], data["frames"], concepts, data.get("actor"))
+        actor = data.get("actor")
+        if extra_fields:
+            extra = json.loads((POOLS / f"{extra_fields}.json").read_text(encoding="utf-8"))
+            concepts.update(extra["concepts"])
+            if actor is not None:
+                actor = {**actor, **{part: {**actor[part], **extra["actor"][part]} for part in ("who", "with", "does")}}
+        return cls(data["nouns"], data["heads"], data["frames"], concepts, actor)
+
+    @property
+    def fields(self) -> tuple[str, ...]:
+        return (*_FIELDS, *_EXTRA_FIELDS) if "vpn.yes" in self.concepts else _FIELDS
 
     def piece(self, rng: random.Random, atom: NaturalAtom, slot: str, key: str | None = None) -> str | None:
         options = self.concepts[key or atom.key][slot]
@@ -475,7 +502,7 @@ def _finish(rng: random.Random, text: str) -> str:
 def make_natural_example(rng: random.Random, pool: WordingPool, max_clauses: int = 4) -> Example:
     k = rng.choices(range(1, max_clauses + 1), weights=(2, 4, 3, 2)[:max_clauses])[0]
     wide = pool.actor is not None
-    atoms = [sample_atom(rng, field, wide) for field in rng.sample(_FIELDS, k)]
+    atoms = [sample_atom(rng, field, wide) for field in rng.sample(pool.fields, k)]
     action = rng.choices(("BLOCK", "REVIEW", "ALLOW"), weights=(5, 3, 2))[0]
     if k == 1:
         shape = "single"

@@ -412,3 +412,39 @@ def test_the_sft_pools_generate_the_wider_grammar_without_leftover_placeholders(
         parse_checked(format_rule(example.rule))
         fields_used |= set(re.findall(r"(?:txn|device|merchant|user)\.\w+", format_rule(example.rule)))
     assert len(fields_used) == 12
+
+
+_EXTRA_PAIRS = [("sft_natural", "sft_fields"), ("sft_formal", "sft_fields"), ("sft_ops", "sft_fields"),
+                ("rl_natural", "rl_fields")]
+
+
+@pytest.mark.parametrize("name,extra", _EXTRA_PAIRS)
+def test_the_extra_fields_generate_valid_rules_without_leftover_placeholders(name, extra):
+    pool = WordingPool.load(name, extra)
+    rng = random.Random(0)
+    fields_used = set()
+    for _ in range(4000):
+        example = make_natural_example(rng, pool)
+        assert "{" not in example.prompt and "}" not in example.prompt, example.prompt
+        rule = format_rule(example.rule)
+        parse_checked(rule)
+        fields_used |= set(re.findall(r"(?:txn|device|merchant|user|card|ip)\.\w+", rule))
+    assert len(fields_used) == 18
+
+
+def test_the_extra_field_wording_is_not_shared_with_rl():
+    sft, rl = WordingPool.load("sft_natural", "sft_fields"), WordingPool.load("rl_natural", "rl_fields")
+    for key in ("vpn", "risk_country", "prepaid", "mismatch", "disposable_email"):
+        for side in ("yes", "no"):
+            for slot in ("pre", "post", "clause", "item"):
+                concept = f"{key}.{side}"
+                assert not set(sft.concepts[concept][slot]) & set(rl.concepts[concept][slot]), (concept, slot)
+    for key in ("gt", "gte", "lt", "lte"):
+        for slot in ("post", "clause", "item"):
+            concept = f"ip_cards.{key}"
+            assert not set(sft.concepts[concept][slot]) & set(rl.concepts[concept][slot]), (concept, slot)
+
+
+def test_the_extra_fields_stay_off_without_their_wording():
+    pool = WordingPool.load("sft_natural")
+    assert len(pool.fields) == 12

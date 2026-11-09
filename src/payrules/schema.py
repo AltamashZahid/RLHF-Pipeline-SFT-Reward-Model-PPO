@@ -36,6 +36,12 @@ _SPECS = (
     FieldSpec("user.account_age_days", FieldType.INT, 0, 10_000),
     FieldSpec("user.failed_attempts_24h", FieldType.INT, 0, 100),
     FieldSpec("user.kyc_verified", FieldType.BOOL),
+    FieldSpec("txn.is_vpn", FieldType.BOOL),  # VPN, proxy or other anonymous IP.
+    FieldSpec("txn.high_risk_country", FieldType.BOOL),  # Card or IP is in a country on the high-risk list.
+    FieldSpec("card.is_prepaid", FieldType.BOOL),
+    FieldSpec("card.country_mismatch", FieldType.BOOL),  # The card's country is not the IP's country.
+    FieldSpec("user.disposable_email", FieldType.BOOL),
+    FieldSpec("ip.cards_24h", FieldType.INT, 0, 1000),  # Different cards tried from this IP in 24 hours.
 )
 
 SCHEMA: dict[str, FieldSpec] = {spec.name: spec for spec in _SPECS}

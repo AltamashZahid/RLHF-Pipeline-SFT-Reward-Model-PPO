@@ -58,14 +58,29 @@ def _mule_account(txn: dict, rng: random.Random) -> None:
 _PATTERNS = (_account_takeover, _card_testing, _mule_account)
 
 
+def _extra_fields(rng: random.Random) -> dict:
+    return {
+        "txn.is_vpn": rng.random() < 0.05,
+        "txn.high_risk_country": rng.random() < 0.01,
+        "card.is_prepaid": rng.random() < 0.03,
+        "card.country_mismatch": rng.random() < 0.03,
+        "user.disposable_email": rng.random() < 0.02,
+        "ip.cards_24h": min(1 + int(rng.expovariate(3.0)), 1000),
+    }
+
+
 def generate_transactions(n: int, seed: int = 0, fraud_rate: float = 0.02) -> list[dict]:
     """Same n, seed and fraud_rate always produce the same transactions."""
     rng = random.Random(seed)
+    # A separate stream, so adding these fields leaves every older field's values unchanged.
+    # No fraud pattern uses them, so they carry no fraud signal in this data.
+    extra_rng = random.Random(f"{seed}:extra")
     txns = []
     for _ in range(n):
         txn = _legit(rng)
         if rng.random() < fraud_rate:
             rng.choice(_PATTERNS)(txn, rng)
             txn[LABEL] = True
+        txn.update(_extra_fields(extra_rng))
         txns.append(txn)
     return txns

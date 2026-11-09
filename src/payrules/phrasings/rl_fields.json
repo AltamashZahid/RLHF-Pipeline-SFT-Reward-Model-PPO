@@ -1,0 +1,88 @@
+{
+ "concepts": {
+  "vpn.yes": {
+   "pre": ["tunnelled", "VPN-based", "anonymised-IP"],
+   "post": ["coming over VPN", "that use a VPN service", "tunnelled through a VPN", "from anonymous proxies", "with the IP masked by a VPN", "made while on a proxy", "from behind an anonymiser", "hidden by a proxy server"],
+   "clause": ["VPN use is seen", "they connect with a VPN", "an anonymiser is in use", "the IP is masked", "traffic is tunnelled through a VPN", "the IP is flagged as a proxy", "a VPN service is on"],
+   "item": ["VPN in use", "masked IP", "anonymous proxy", "using VPN"]
+  },
+  "vpn.no": {
+   "pre": ["unproxied"],
+   "post": ["with VPN off", "with no anonymiser", "from an unmasked IP", "where no proxy is involved", "minus any VPN", "free of proxies"],
+   "clause": ["VPN use isn't seen", "the IP isn't masked", "they connect without any VPN", "no anonymiser is in use", "the IP isn't flagged as a proxy", "VPN is off"],
+   "item": ["VPN off", "unmasked IP", "no anonymiser", "not using VPN"]
+  },
+  "risk_country.yes": {
+   "pre": ["high-risk-region", "flagged-country"],
+   "post": ["from flagged countries", "from regions we treat as high risk", "from countries we consider risky", "originating in high-risk regions", "linked to flagged countries", "from a watchlisted country"],
+   "clause": ["the country is flagged as high risk", "the region is high risk", "it originates in a high-risk region", "the country is on the watchlist", "we treat the country as risky", "the payment is linked to a flagged country"],
+   "item": ["flagged country", "high-risk region", "watchlisted country", "country flagged high risk"]
+  },
+  "risk_country.no": {
+   "pre": ["unflagged-country"],
+   "post": ["from unflagged countries", "from regions we treat as low risk", "from countries we consider safe", "outside flagged regions", "from a country off the watchlist", "not linked to flagged countries"],
+   "clause": ["the country isn't flagged", "the region is low risk", "it doesn't originate in a high-risk region", "the country is off the watchlist", "we don't treat the country as risky", "the payment isn't linked to a flagged country"],
+   "item": ["unflagged country", "low-risk region", "country off the watchlist", "country not flagged"]
+  },
+  "prepaid.yes": {
+   "pre": ["pre-loaded-card", "prepaid-funded"],
+   "post": ["funded by a prepaid instrument", "using pre-loaded cards", "made through prepaid plastic", "where the funding type is prepaid", "charged to prepaid cards", "on pre-loaded plastic"],
+   "clause": ["the funding type is prepaid", "the card is pre-loaded", "the BIN is a prepaid BIN", "a pre-loaded card is being charged", "the plastic is prepaid", "the card comes pre-loaded"],
+   "item": ["pre-loaded card", "funding type prepaid", "prepaid BIN", "prepaid plastic"]
+  },
+  "prepaid.no": {
+   "pre": ["non-preloaded"],
+   "post": ["where the funding type isn't prepaid", "using cards that aren't pre-loaded", "charged to non-prepaid plastic", "funded by something other than prepaid", "on cards other than prepaid"],
+   "clause": ["the funding type isn't prepaid", "the card isn't pre-loaded", "the BIN isn't a prepaid BIN", "the plastic isn't prepaid", "the card doesn't come pre-loaded"],
+   "item": ["card not pre-loaded", "funding type not prepaid", "non-prepaid BIN", "not prepaid plastic"]
+  },
+  "mismatch.yes": {
+   "pre": ["cross-geo", "IP-card-mismatched"],
+   "post": ["where the IP geo and the card geo disagree", "whose card issuer country is not the IP location", "with an issuer country unlike the IP location", "where the IP location conflicts with the card", "with IP and issuing country out of line"],
+   "clause": ["the IP geo and the card geo disagree", "the issuer country is not the IP location", "the IP location conflicts with the card's country", "the issuing country and the IP location are not the same", "IP and issuing country don't line up"],
+   "item": ["IP geo != card geo", "issuer country differs from IP", "IP and issuer country conflict", "IP/issuer mismatch"]
+  },
+  "mismatch.no": {
+   "pre": ["geo-consistent"],
+   "post": ["where the IP geo and the card geo agree", "whose card issuer country is the IP location", "with an issuer country equal to the IP location", "where the IP location fits the card", "with IP and issuing country in line"],
+   "clause": ["the IP geo and the card geo agree", "the issuer country is the IP location", "the IP location fits the card's country", "the issuing country and the IP location are the same", "IP and issuing country line up"],
+   "item": ["IP geo = card geo", "issuer country equals IP", "IP and issuer country agree", "IP/issuer consistent"]
+  },
+  "disposable_email.yes": {
+   "pre": ["one-time-email", "fake-email"],
+   "post": ["using a one-time mailbox", "registered with a fake mailbox", "whose mail domain is disposable", "from one-time email domains", "on a short-lived email", "with an email on a disposable domain"],
+   "clause": ["the mail domain is disposable", "a one-time mailbox is used", "the account email is short-lived", "the email domain is known to be disposable", "the mailbox looks fake", "they registered using a one-time email"],
+   "item": ["one-time mailbox", "disposable domain", "short-lived email", "fake mailbox"]
+  },
+  "disposable_email.no": {
+   "pre": ["established-email"],
+   "post": ["whose mail domain isn't disposable", "using a long-lived mailbox", "from established email domains", "with an email not on a disposable domain", "registered with a genuine mailbox"],
+   "clause": ["the mail domain isn't disposable", "a long-lived mailbox is used", "the account email isn't short-lived", "the email domain is not disposable", "the mailbox looks genuine"],
+   "item": ["long-lived mailbox", "domain not disposable", "genuine mailbox", "established email"]
+  },
+  "ip_cards.gt": {
+   "pre": [],
+   "post": ["where a single IP cycled through more than {n} cards in a day", "when one IP has seen over {n} distinct cards in 24 hours", "with a card count per IP above {n} for the day"],
+   "clause": ["a single IP cycled through more than {n} cards in a day", "one IP has seen over {n} distinct cards in 24 hours", "the daily card count for the IP is above {n}"],
+   "item": ["cards per IP above {n}", "IP saw over {n} distinct cards", "more than {n} distinct cards on the IP"]
+  },
+  "ip_cards.gte": {
+   "pre": [],
+   "post": ["where a single IP cycled through {n} or more cards in a day", "when one IP has seen {n}+ distinct cards in 24 hours", "with a card count per IP of {n} or above for the day"],
+   "clause": ["a single IP cycled through {n} or more cards in a day", "one IP has seen at least {n} distinct cards in 24 hours", "the daily card count for the IP is {n} or above"],
+   "item": ["cards per IP {n}+", "IP saw {n}+ distinct cards", "{n} or more distinct cards on the IP"]
+  },
+  "ip_cards.lt": {
+   "pre": [],
+   "post": ["where a single IP cycled through fewer than {n} cards in a day", "when one IP has seen under {n} distinct cards in 24 hours", "with a card count per IP below {n} for the day"],
+   "clause": ["a single IP cycled through fewer than {n} cards in a day", "one IP has seen under {n} distinct cards in 24 hours", "the daily card count for the IP is below {n}"],
+   "item": ["cards per IP below {n}", "IP saw under {n} distinct cards", "fewer than {n} distinct cards on the IP"]
+  },
+  "ip_cards.lte": {
+   "pre": [],
+   "post": ["where a single IP cycled through {n} cards or fewer in a day", "when one IP has seen at most {n} distinct cards in 24 hours", "with a card count per IP not above {n} for the day"],
+   "clause": ["a single IP cycled through {n} cards or fewer in a day", "one IP has seen at most {n} distinct cards in 24 hours", "the daily card count for the IP is not above {n}"],
+   "item": ["cards per IP at most {n}", "IP saw at most {n} distinct cards", "{n} or fewer distinct cards on the IP"]
+  }
+ }
+}

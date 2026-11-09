@@ -1,0 +1,459 @@
+{
+ "concepts": {
+  "vpn.yes": {
+   "pre": [
+    "VPN",
+    "VPN-routed",
+    "proxied",
+    "proxy-routed"
+   ],
+   "post": [
+    "over a VPN",
+    "through a VPN",
+    "via a VPN",
+    "behind a VPN",
+    "through a proxy",
+    "via a proxy",
+    "from a VPN connection",
+    "on a VPN",
+    "routed through a proxy",
+    "from a hidden IP",
+    "from masked IPs"
+   ],
+   "clause": [
+    "the user is on a VPN",
+    "the connection goes through a VPN",
+    "a VPN is detected",
+    "a proxy is detected",
+    "the payment comes through a proxy",
+    "the IP belongs to a VPN",
+    "they're behind a proxy",
+    "the user hides their IP with a VPN",
+    "the connection is proxied"
+   ],
+   "item": [
+    "VPN",
+    "on VPN",
+    "behind a proxy",
+    "proxy detected"
+   ]
+  },
+  "vpn.no": {
+   "pre": [
+    "non-VPN",
+    "non-proxied",
+    "direct-connection"
+   ],
+   "post": [
+    "without a VPN",
+    "not on a VPN",
+    "not through a proxy",
+    "with no VPN",
+    "with no proxy",
+    "on a direct connection",
+    "from a normal IP",
+    "not routed through a VPN"
+   ],
+   "clause": [
+    "no VPN is detected",
+    "the user isn't on a VPN",
+    "there is no proxy",
+    "the connection is direct",
+    "the connection doesn't go through a VPN",
+    "no proxy is in use",
+    "the IP isn't a VPN"
+   ],
+   "item": [
+    "no VPN",
+    "not on VPN",
+    "no proxy",
+    "direct connection"
+   ]
+  },
+  "risk_country.yes": {
+   "pre": [
+    "high-risk-country",
+    "risky-country"
+   ],
+   "post": [
+    "from high-risk countries",
+    "from a high-risk country",
+    "from risky countries",
+    "from countries on the high-risk list",
+    "from a country on our risk list",
+    "tied to a high-risk country",
+    "out of high-risk countries",
+    "from sanctioned or risky countries"
+   ],
+   "clause": [
+    "the country is high risk",
+    "it comes from a high-risk country",
+    "the country is on the high-risk list",
+    "the country is risky",
+    "the card or IP is in a high-risk country",
+    "the payment is tied to a high-risk country",
+    "the country is on our block list"
+   ],
+   "item": [
+    "high-risk country",
+    "risky country",
+    "country on the risk list",
+    "high risk geography"
+   ]
+  },
+  "risk_country.no": {
+   "pre": [
+    "low-risk-country",
+    "safe-country"
+   ],
+   "post": [
+    "from low-risk countries",
+    "not from a high-risk country",
+    "from safe countries",
+    "from countries off the risk list",
+    "outside high-risk countries",
+    "from countries not on the high-risk list"
+   ],
+   "clause": [
+    "the country is not high risk",
+    "the country isn't on the high-risk list",
+    "the country is low risk",
+    "it doesn't come from a high-risk country",
+    "the country is safe",
+    "the country is off the risk list"
+   ],
+   "item": [
+    "not a high-risk country",
+    "low-risk country",
+    "safe country",
+    "country not on the risk list"
+   ]
+  },
+  "prepaid.yes": {
+   "pre": [
+    "prepaid",
+    "prepaid-card"
+   ],
+   "post": [
+    "on prepaid cards",
+    "with a prepaid card",
+    "by prepaid card",
+    "from prepaid cards",
+    "using prepaid cards",
+    "paid with a prepaid card",
+    "funded by prepaid cards"
+   ],
+   "clause": [
+    "the card is prepaid",
+    "it's a prepaid card",
+    "a prepaid card is used",
+    "they pay with a prepaid card",
+    "the card type is prepaid"
+   ],
+   "item": [
+    "prepaid card",
+    "prepaid",
+    "card is prepaid"
+   ]
+  },
+  "prepaid.no": {
+   "pre": [
+    "non-prepaid"
+   ],
+   "post": [
+    "not on prepaid cards",
+    "on non-prepaid cards",
+    "with a regular card",
+    "without a prepaid card",
+    "not using a prepaid card",
+    "on a credit or debit card",
+    "from non-prepaid cards"
+   ],
+   "clause": [
+    "the card isn't prepaid",
+    "the card is not prepaid",
+    "it's not a prepaid card",
+    "no prepaid card is used",
+    "the card is a regular credit or debit card",
+    "the funding isn't prepaid"
+   ],
+   "item": [
+    "not prepaid",
+    "non-prepaid card",
+    "regular card",
+    "card isn't prepaid"
+   ]
+  },
+  "mismatch.yes": {
+   "pre": [
+    "country-mismatch",
+    "mismatched-country",
+    "geo-mismatch"
+   ],
+   "post": [
+    "where the card country doesn't match the IP country",
+    "with a card country different from the IP country",
+    "with mismatched card and IP countries",
+    "where the card and IP are in different countries",
+    "whose IP is in another country from the card",
+    "with a geo mismatch between card and IP",
+    "with the IP outside the card's country"
+   ],
+   "clause": [
+    "the card country doesn't match the IP country",
+    "the card and IP countries differ",
+    "the IP is in a different country from the card",
+    "the card's country isn't the IP's country",
+    "there's a mismatch between the card country and the IP country",
+    "the card is from one country and the IP from another"
+   ],
+   "item": [
+    "card/IP country mismatch",
+    "card and IP country differ",
+    "geo mismatch"
+   ]
+  },
+  "mismatch.no": {
+   "pre": [
+    "country-matched",
+    "geo-matched"
+   ],
+   "post": [
+    "where the card country matches the IP country",
+    "with matching card and IP countries",
+    "where the card and IP are in the same country",
+    "whose IP is in the card's country",
+    "with no geo mismatch",
+    "with the IP inside the card's country"
+   ],
+   "clause": [
+    "the card country matches the IP country",
+    "the card and IP countries match",
+    "the IP is in the same country as the card",
+    "there's no mismatch between the card and IP countries",
+    "the card and the IP are from the same country"
+   ],
+   "item": [
+    "card and IP country match",
+    "same card and IP country",
+    "no geo mismatch"
+   ]
+  },
+  "disposable_email.yes": {
+   "pre": [
+    "disposable-email",
+    "throwaway-email",
+    "temp-mail"
+   ],
+   "post": [
+    "with a disposable email",
+    "from disposable email addresses",
+    "using a throwaway email",
+    "with temp mail addresses",
+    "from users on disposable emails",
+    "with a burner email",
+    "signed up with a temporary email"
+   ],
+   "clause": [
+    "the email is disposable",
+    "the user has a disposable email",
+    "it's a throwaway email",
+    "a temporary email is used",
+    "the email address is a burner",
+    "the customer signed up with a disposable address",
+    "the email comes from a temp mail service"
+   ],
+   "item": [
+    "disposable email",
+    "throwaway email",
+    "temp mail",
+    "burner email"
+   ]
+  },
+  "disposable_email.no": {
+   "pre": [
+    "real-email"
+   ],
+   "post": [
+    "with a real email",
+    "not from disposable emails",
+    "without a disposable email",
+    "with a permanent email address",
+    "not using a throwaway email",
+    "from users with normal emails"
+   ],
+   "clause": [
+    "the email is not disposable",
+    "the email isn't disposable",
+    "the user has a real email",
+    "it's not a throwaway email",
+    "the address is permanent",
+    "no temporary email is used"
+   ],
+   "item": [
+    "not a disposable email",
+    "real email",
+    "permanent email",
+    "no throwaway email"
+   ]
+  },
+  "ip_cards.gt": {
+   "pre": [],
+   "post": [
+    "from an IP that tried more than {n} cards in 24 hours",
+    "from IPs with over {n} different cards in a day",
+    "from IPs using more than {n} unique cards in the last 24 hours",
+    "where the IP has tried over {n} cards today"
+   ],
+   "clause": [
+    "the IP has tried more than {n} cards in 24 hours",
+    "over {n} different cards came from this IP in a day",
+    "the IP used more than {n} unique cards in the last 24 hours",
+    "more than {n} cards were attempted from the IP in the past day"
+   ],
+   "item": [
+    "over {n} cards from one IP in 24h",
+    "more than {n} cards per IP per day",
+    "IP tried over {n} cards"
+   ]
+  },
+  "ip_cards.gte": {
+   "pre": [],
+   "post": [
+    "from an IP that tried {n} or more cards in 24 hours",
+    "from IPs with at least {n} different cards in a day",
+    "from IPs using {n}+ unique cards in the last 24 hours",
+    "where the IP has tried at least {n} cards today"
+   ],
+   "clause": [
+    "the IP has tried {n} or more cards in 24 hours",
+    "at least {n} different cards came from this IP in a day",
+    "the IP used {n} or more unique cards in the last 24 hours",
+    "{n} or more cards were attempted from the IP in the past day"
+   ],
+   "item": [
+    "{n}+ cards from one IP in 24h",
+    "at least {n} cards per IP per day",
+    "IP tried {n} or more cards"
+   ]
+  },
+  "ip_cards.lt": {
+   "pre": [],
+   "post": [
+    "from an IP that tried fewer than {n} cards in 24 hours",
+    "from IPs with under {n} different cards in a day",
+    "from IPs using fewer than {n} unique cards in the last 24 hours",
+    "where the IP has tried under {n} cards today"
+   ],
+   "clause": [
+    "the IP has tried fewer than {n} cards in 24 hours",
+    "under {n} different cards came from this IP in a day",
+    "the IP used fewer than {n} unique cards in the last 24 hours",
+    "fewer than {n} cards were attempted from the IP in the past day"
+   ],
+   "item": [
+    "under {n} cards from one IP in 24h",
+    "fewer than {n} cards per IP per day",
+    "IP tried under {n} cards"
+   ]
+  },
+  "ip_cards.lte": {
+   "pre": [],
+   "post": [
+    "from an IP that tried at most {n} cards in 24 hours",
+    "from IPs with no more than {n} different cards in a day",
+    "from IPs using up to {n} unique cards in the last 24 hours",
+    "where the IP has tried {n} cards or fewer today"
+   ],
+   "clause": [
+    "the IP has tried at most {n} cards in 24 hours",
+    "no more than {n} different cards came from this IP in a day",
+    "the IP used {n} or fewer unique cards in the last 24 hours",
+    "at most {n} cards were attempted from the IP in the past day"
+   ],
+   "item": [
+    "up to {n} cards from one IP in 24h",
+    "at most {n} cards per IP per day",
+    "IP tried {n} or fewer cards"
+   ]
+  }
+ },
+ "actor": {
+  "who": {
+   "vpn.yes": [
+    "VPN users",
+    "people on VPNs",
+    "users behind a proxy"
+   ],
+   "vpn.no": [
+    "users without a VPN",
+    "people on a direct connection"
+   ],
+   "disposable_email.yes": [
+    "users with disposable emails",
+    "accounts on throwaway emails"
+   ],
+   "disposable_email.no": [
+    "users with real emails",
+    "accounts with permanent emails"
+   ]
+  },
+  "with": {
+   "vpn.yes": [
+    "on a VPN",
+    "behind a VPN",
+    "using a proxy"
+   ],
+   "vpn.no": [
+    "without a VPN",
+    "not on a proxy"
+   ],
+   "disposable_email.yes": [
+    "with disposable emails",
+    "using throwaway emails"
+   ],
+   "disposable_email.no": [
+    "with real emails",
+    "with permanent emails"
+   ],
+   "ip_cards.gt": [
+    "on an IP that tried more than {n} cards in 24 hours"
+   ],
+   "ip_cards.gte": [
+    "on an IP that tried {n} or more cards in 24 hours"
+   ],
+   "ip_cards.lt": [
+    "on an IP that tried fewer than {n} cards in 24 hours"
+   ],
+   "ip_cards.lte": [
+    "on an IP that tried at most {n} cards in 24 hours"
+   ]
+  },
+  "does": {
+   "risk_country.yes": [
+    "pay from a high-risk country",
+    "transact from high-risk countries"
+   ],
+   "risk_country.no": [
+    "pay from a low-risk country",
+    "transact from countries off the risk list"
+   ],
+   "prepaid.yes": [
+    "pay with a prepaid card",
+    "use prepaid cards"
+   ],
+   "prepaid.no": [
+    "pay with a non-prepaid card",
+    "use a regular card"
+   ],
+   "mismatch.yes": [
+    "pay with a card from a different country than their IP",
+    "use a card whose country doesn't match their IP"
+   ],
+   "mismatch.no": [
+    "pay with a card from the same country as their IP",
+    "use a card whose country matches their IP"
+   ]
+  }
+ }
+}
