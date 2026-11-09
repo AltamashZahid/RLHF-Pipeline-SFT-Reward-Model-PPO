@@ -21,41 +21,60 @@ country, prepaid card, card/IP country mismatch, disposable email and cards trie
 A prediction counts as correct only if the verifier proves it makes the same decision as the correct
 rule on every possible transaction. Intervals are 95% paired bootstrap intervals over rules.
 
-v4 is the last 12-field model and v5 is the current 18-field model. v5 reads more kinds of rule, but it
-is not more accurate on the rules v4 could already read.
+v4 is the last 12-field model and v5 is the current 18-field model. **The chosen policy is v5 PPO at
+iteration 50.** It was picked on validation before these tests were opened. v5 reads more kinds of rule,
+but it is not more accurate on the rules v4 could already read.
 
-| Test set | Rules | v4 SFT | v5 SFT | v5 − v4 (points) |
-|---|---|---|---|---|
-| Unseen rules in RL wording, some using the new fields | 500 | 55.4% | **82.8%** | +27.4 (+22.8 to +31.8) |
-| Natural-language rules, LLM-written, 12 fields only | 200 | 82.0% | **78.5%** | −3.5 (−8.5 to +1.0) |
-| Unseen rules in RL wording, 12 fields only | 500 | 90.4% | **86.8%** | −3.6 (−6.2 to −1.0) |
-| Rules from public payment docs, new fields | 20 | 0 of 20 | **16 of 20** | see below |
-| Rules from public payment docs, older fields | 12 | 9 of 12 | **11 of 12** | +2 rules (0 to +5) |
+| Test set | Rules | v4 SFT | v5 SFT | v5 PPO, iter 50 (chosen) | v5 PPO, iter 150 |
+|---|---|---|---|---|---|
+| Unseen rules in RL wording, some using the new fields | 500 | 55.4% | 82.8% | **86.8%** | 88.4% |
+| Natural-language rules, LLM-written, 12 fields only | 200 | 82.0% | 78.5% | **80.0%** | 75.0% |
+| Unseen rules in RL wording, 12 fields only | 500 | 90.4% | 86.8% | **86.8%** | 90.8% |
+| Rules from public payment docs, new fields | 20 | 0 of 20 | 16 of 20 | **15 of 20** | 16 of 20 |
+| Rules from public payment docs, older fields | 12 | 9 of 12 | 11 of 12 | **10 of 12** | 9 of 12 |
 
-- **The new fields work.** v4 could not express them. In the first row, v5 gets 143 of the 202 rules
+Chosen policy against v4 SFT, in points:
+
+| Test set | Difference | Rules gained / lost |
+|---|---|---|
+| RL wording, some using the new fields | +31.4 (+27.0 to +36.0) | 165 / 8 |
+| Natural-language rules | −2.0 (−7.0 to +2.5) | 10 / 14 |
+| RL wording, 12 fields only | −3.6 (−6.4 to −0.8) | 16 / 34 |
+
+- **The new fields work.** v4 could not express them. In the first row, v5 SFT gets 143 of the 202 rules
   that use a new field (70.8%).
-- **Rules on the older fields got slightly worse.** The drop is significant on one 500-rule test and
-  not on the natural test (8 rules gained, 15 lost). None of the 15 lost natural rules uses a new
-  field, so the model is not confusing old fields with new ones. The cause isn't tested. A likely one
-  is that the new fields took training rows away from the older ones.
-- **The 12 public older-field rules don't settle this.** v5 gained 2 of them and lost none, but with 12
-  rules that could be chance, and the larger tests point the other way.
-- **False blocks did not change significantly.** Against 2,000 synthetic transactions, false blocks
-  per 1,000 decisions went from 5.99 to 2.18 on the natural test (−13.94 to +2.38) and from 5.60 to 7.96
-  on the older RL test (−2.10 to +7.65).
-- **PPO changed nothing in v5.** The run was shortened to 50 iterations. Its two checks (86.3%, 85.7%)
-  never beat the SFT starting point (86.7%), so it kept the SFT weights, and the saved PPO checkpoint
-  is identical to SFT. In the full 150-iteration v4 run, PPO also made no significant difference:
-  −0.5 points (−3.5 to +2.5) on the natural test and +0.4 (−1.2 to +2.0) on RL wording.
-- **Compiler.** Sampling 8 candidates and taking the most common behaviour scored 78.5% on the natural
-  test, the same as a single answer. Sending rules below 75% agreement to a person holds back 23 of 200,
-  catches 16 of the 43 wrong answers and delays 7 right ones. The other 177 rules are 84.7% correct,
+- **Rules on the older fields did not improve.** The drop is significant on one 500-rule test and not
+  on the natural test. None of the 15 natural rules that v5 SFT lost against v4 uses a new field, so the
+  model is not confusing old fields with new ones. The cause isn't tested. A likely one is that the new
+  fields took training rows away from the older ones.
+- **The 12 public older-field rules don't settle this.** With so few rules, a gain of 1 or 2 could be
+  chance, and the larger tests point the other way.
+- **PPO helped on its own wording, not on natural text.** These are against v5 SFT:
+
+  | Test set | Iter 50 (points) | Iter 150 (points) |
+  |---|---|---|
+  | RL wording, some new fields | +4.0 (+1.4 to +6.8) | +5.6 (+2.8 to +8.4) |
+  | RL wording, 12 fields only | 0.0 (−2.2 to +2.2) | +4.0 (+1.4 to +6.6) |
+  | Natural-language rules | +1.5 (−1.5 to +5.0) | −3.5 (−6.5 to −0.5) |
+
+  On natural validation, iter 50 scored 94.4% and iter 150 scored 90.4%, against 94.0% for SFT, which is
+  why iter 50 was chosen. On public rules PPO did no better than SFT: 25 of 32 for both PPO checkpoints,
+  27 of 32 for SFT.
+- **PPO raised false blocks on RL wording.** Against 2,000 synthetic transactions, false blocks per 1,000
+  decisions on the 12-field RL test went from 7.96 for SFT to 15.49 at iter 50 (+1.76 to +14.65) and 14.12
+  at iter 150 (+1.24 to +12.44). On the natural test they barely moved: 2.18 to 2.28 (−0.04 to +0.38) and
+  2.29 (−0.03 to +0.38). The RL-wording rise is a real cost of using PPO.
+- **Compiler.** Sampling 8 candidates and taking the most common behaviour scored 80.0% on the natural
+  test, the same as a single answer. Sending rules below 75% agreement to a person holds back 20 of 200,
+  catches 14 of the 40 wrong answers and delays 6 right ones. The other 180 rules are 85.6% correct,
   against 89.9% for v4. Strategy and threshold were chosen on v4 validation sets.
 - **Engine.** p99 decision latency is 77–95 µs per transaction against 100 rules (median 79 µs over
   four runs), on one CPU core ([bench_engine.py](scripts/bench_engine.py)).
 
 **How far to trust these tests.**
 
+- **All older tests.** They have now been scored several times. Nothing was tuned on them after scoring,
+  and iter 50 was chosen on validation first, but they are no longer untouched.
 - **Natural test.** v5 is a regression check here, not a clean score, because I read 8 of v4's errors
   on it before building v5.
 - **Public rules.** [human_rules.jsonl](eval/human_rules.jsonl) was frozen before scoring, but the test
@@ -64,22 +83,23 @@ is not more accurate on the rules v4 could already read.
   - 22 rows are labelled verbatim and 10 trimmed. One verbatim row (human-10) had ", review" added, so 21
     are strictly verbatim. Quotes outside Stripe came through a summarising fetch tool.
   - Some rules are code-like syntax, not sentences.
-  - The compiler got 26 of 32. Review held back 2, and 25 of the other 30 were right.
-- **Earlier public rules.** Scores on [online_rules.jsonl](eval/online_rules.jsonl) went from 15 of 20
-  to 16 of 20. Those rules had already been studied, so this is not clean either.
+  - The compiler on the chosen policy got 26 of 32. Review held back 4, and 25 of the other 28 were right.
+- **Earlier public rules.** On [online_rules.jsonl](eval/online_rules.jsonl), v4 SFT got 15 of 20, v5 SFT
+  and PPO iter 150 got 16, and PPO iter 50 and its compiler got 14. Those rules had already been studied,
+  so this is not clean either.
 - **New fields in the simulator.** They carry no fraud signal, so results on them show only that a rule
   is compiled correctly, not that it catches fraud.
 
 **The scores to expect are the test scores.** For v4, validation said 96.0% on natural wording and the
-test said 82.0%. For v5, validation said 94.0% and the test said 78.5%. Validation rules come from the
-same generator as the training data, while the test's rules were written independently and include
-shapes training rarely or never covers. That explanation fits the errors but has not been tested. v5's
-accuracy falls with rule size on the natural test: 85.7% for one clause, 84.6% for two, 76.9% for three,
-66.7% for four and 0 of 2 for five.
+test said 82.0%. For v5 PPO iter 50, validation said 94.4% and the test said 80.0%. Validation rules come
+from the same generator as the training data, while the test's rules were written independently and
+include shapes training rarely or never covers. That explanation fits the errors but has not been
+tested. v5 SFT's accuracy falls with rule size on the natural test: 85.7% for one clause, 84.6% for two,
+76.9% for three, 66.7% for four and 0 of 2 for five.
 
 ### Where the natural test goes wrong
 
-Of v5's 43 mistakes, 25 use the right fields with a wrong value or structure, 7 drop a condition, 6
+Of v5 SFT's 43 mistakes, 25 use the right fields with a wrong value or structure, 7 drop a condition, 6
 invent one, 4 have the wrong action and 1 fails the type check. Typical cases:
 
 - **Grouping:** `(device new OR account new) AND amount` loses its brackets, so AND binds first.
@@ -101,25 +121,31 @@ same rules, and v4 reached 93.3% (v5: 91.7%). Those 60 rules guided the grammar 
 are optimistic. On the natural test, v4 SFT beat the first SFT by 62.5 points (19.5% to 82.0%, +55.5 to
 +69.5). v4 also has more parameters (360M against 135M), so that gain is not from wording alone.
 
-**2. PPO helps a weak policy, not a strong one.** In an earlier round, PPO took SFT from 45.6% to 65.6%
+**2. PPO's gains stay in the wording it trains on.** In an early round, PPO took SFT from 45.6% to 65.6%
 on 500 unseen rules in its own phrasing (+20.0, +16.4 to +23.6; 102 gained, 2 lost), but only 36.2% to
-36.8% on an unseen phrasing style (+0.6, −1.6 to +2.6). Since then, SFT has reached 80–90% in PPO's
-phrasing and samples the right answer most of the time, so there is little to reinforce. Neither later
-run produced a significant gain. The short v5 run does not settle whether a longer one would help.
+36.8% on an unseen phrasing style (+0.6, −1.6 to +2.6). v5 shows the same split on a much stronger model.
+Longer training gains on RL wording and loses on natural wording, as the Results table shows. The v4 run
+gained nothing significant in either (−0.5 on natural, +0.4 on RL wording).
 
-**3. The reward model shares the policy's blind spot.** Each figure below is how often it ranks the
-right rule above a wrong one.
+**3. A better reward model made PPO work, but only so far.** The same v5 SFT and PPO settings gave
+different results with different reward models. A shortened reward model (1,300 steps, 7,318 pairs, on an
+old 12-field backbone) gave no PPO gain in 50 iterations: its two checks (86.3%, 85.7%) never beat the
+86.7% start, so it kept the SFT weights. The full one (9,276 pairs, on a backbone trained on v5 data) gave
+88.0% at iteration 50 and 90.7% at the end of the resumed run. The two runs also differ in random
+sampling, so this is suggestive, not proof.
 
-| Wrong rules used | Full v4 reward model | Shortened v5 reward model |
+How often the reward model ranks the right rule above a wrong one on the tests:
+
+| Wrong rules used | Full v4 reward model | Full v5 reward model |
 |---|---|---|
-| Synthetic corruptions, RL wording | 98.0% (500 pairs) | 94.8% (500 pairs, new test) |
-| SFT's real mistakes, RL wording | 97.9% (48 pairs) | 93.7% (223 pairs, new test) |
-| Same 48 pairs as the v4 column | 97.9% | 70.8% |
-| v4 SFT's real mistakes, natural test | 36.1% (36 pairs) | 16.7% (same 36 pairs) |
+| Synthetic corruptions, RL wording | 98.0% (500 pairs) | 98.6% (500 pairs, new test) |
+| SFT's real mistakes, RL wording | 97.9% (48 pairs) | 88.4% (86 pairs, new test) |
+| SFT's real mistakes, natural test | 36.1% (36 pairs) | 44.2% (43 pairs) |
 
-These are small samples, so treat them as warnings. The v5 model had a much shorter run on fewer mined
-mistakes, which may explain the drop, but that hasn't been tested. A compiler that picks purely by
-reward score did worst on the natural test in both rounds (v4 78.0%, v5 74.5%).
+Each column's real mistakes come from that version's own SFT, so the pairs differ. On natural wording the
+reward model is still below a coin flip on small samples, which is the likely reason PPO doesn't carry
+over to natural text, though that hasn't been tested. A compiler that picks purely by reward score scored
+80.0% on the natural test, level with the other strategies, up from 74.5% with the shortened model.
 
 **4. An audit metric pointed the wrong way.** Across requests, an earlier reward model separated the
 PPO model's right and wrong outputs with an AUC of only 0.70, suggesting a retrain. But Bradley-Terry
@@ -179,17 +205,17 @@ round trip. It finds structural repetition only, not meaning.
 
 ## How it works
 
-These are the v5 stages. Mining, the reward model and PPO were shortened to meet a deadline, and the
-last column shows their measured times.
+These are the stages behind the chosen v5 policy, with measured times.
 
 | Stage | What it does | Time on an RTX 2050 |
 |---|---|---|
 | Data ([build_dataset_v5.py](scripts/build_dataset_v5.py)) | 16,000 training rows over 18 fields: three LLM-written wording pools (80%), older templates (20%), and free-form sentences. RL and test wording come from a separate pool. Each new field appears about 1,500 times and each older field about 3,000. | < 1 min |
 | SFT ([train_sft.py](scripts/train_sft.py)) | LoRA (r=32) on SmolLM2-360M-Instruct, 3 epochs, fp16 autocast, lr 3e-4, epoch picked on 650 validation rows | 66 min |
-| Pair mining ([mine_pairs.py](scripts/mine_pairs.py)) | Samples the policy twice on each of 4,000 RL requests. Wrong samples become pairs against the gold rule and against right samples. | 15 min |
-| Reward model ([train_reward.py](scripts/train_reward.py)) | Bradley-Terry loss on 7,318 pairs for 1,300 steps, on a 135M backbone to save memory. Validation pair accuracy 92.3%. | 11 min |
-| Audit ([audit_reward.py](scripts/audit_reward.py)) | Shortcut checks and ranking of real samples within a request: right over wrong 90.9% on RL wording (11 requests). | 1.5 min |
-| PPO ([train_ppo.py](scripts/train_ppo.py)) | 50 iterations of 32 rollouts. Per-token KL penalty to frozen SFT, GAE, value head, running-std reward scaling, early stop on target KL. Keeps the best validation checkpoint. | 13 min |
+| 135M backbone ([train_sft.py](scripts/train_sft.py)) | The same SFT on the smaller model, for the reward model to build on. Validation 82.9%. | 36 min |
+| Pair mining ([mine_pairs.py](scripts/mine_pairs.py)) | Samples the policy 4 times on each of 4,000 RL requests. Wrong samples become pairs against the gold rule and against right samples. | 30 min |
+| Reward model ([train_reward.py](scripts/train_reward.py)) | Bradley-Terry loss on 9,276 pairs, on the 135M backbone to save memory. Validation pair accuracy 94.3%. | 19 min |
+| Audit ([audit_reward.py](scripts/audit_reward.py)) | Shortcut checks and ranking of real samples within a request: right over wrong 100% on RL wording (11 requests). | 1.5 min |
+| PPO ([train_ppo.py](scripts/train_ppo.py)) | 50 iterations of 32 rollouts. Per-token KL penalty to frozen SFT, GAE, value head, running-std reward scaling, early stop on target KL. Keeps the best validation checkpoint. | 12 min |
 | Compiler ([compiler.py](src/payrules/compiler.py)) | Samples candidates, drops invalid ones, groups them by proven-identical behaviour, and flags low agreement for review. | about 3 s per rule |
 
 **Labels.** Preference labels come from an exact verifier, not human raters, but the policy never
@@ -206,7 +232,14 @@ hashes of the natural test and both public rule sets are in `eval/*.sha256` and 
 scoring.
 
 **Memory.** Peak GPU memory is 5,936 MiB for SFT (the Windows driver serves the excess from shared
-system memory), 2,796 MiB for the reward model and 3,826 MiB for PPO.
+system memory), 2,792 MiB for the reward model and up to 4,320 MiB for PPO.
+
+**A crashed PPO run.** The 150-iteration run crashed just after iteration 60 with a CUDA assert during
+sampling, which fits NaN or inf probabilities, but the weights at that moment were lost. So "iter 150" is
+really two runs: 50 iterations, then 100 more from that checkpoint, with a new seed and a fresh value head,
+optimizer and reward scale. The resumed run finished normally, so the cause is unknown.
+[train_ppo.py](scripts/train_ppo.py) now stops cleanly if the weights go non-finite. Iter 50, the chosen
+policy, was saved before the crash and its weights are all finite.
 
 **A collapsed run.** One 360M run at the default learning rate collapsed to 0% parsing after epoch 1,
 probably from fp16 overflow, though the log lines that would prove it were not kept. It reran stably at
@@ -218,15 +251,14 @@ lr 3e-4, and [train_sft.py](scripts/train_sft.py) now stops after 20 non-finite 
 python -m venv .venv
 .venv/Scripts/pip install torch --index-url https://download.pytorch.org/whl/cu126
 .venv/Scripts/pip install -e ".[train,dev]"
-PYTHON=.venv/Scripts/python.exe bash scripts/run_pipeline.sh    # about 2 hours, plus a 135M backbone
+PYTHON=.venv/Scripts/python.exe bash scripts/run_pipeline.sh    # about 2 h 45 min
 
 .venv/Scripts/python.exe scripts/demo.py "Block payments above 50000 made over a VPN"
 ```
 
-[run_pipeline.sh](scripts/run_pipeline.sh) has not been rerun from a clean clone. It also differs
-slightly from the measured run: there, the reward model's backbone came from a model trained on an
-earlier 12-field dataset whose build script no longer exists, so that backbone never saw the new
-fields' wording. Expect close but not identical numbers. The pipeline uses one seed.
+[run_pipeline.sh](scripts/run_pipeline.sh) has not been rerun as one script from a clean clone, though
+each of its stages ran with these settings. Expect close but not identical numbers. The pipeline uses one
+seed.
 
 Tested with Python 3.13, torch 2.14.1+cu126, transformers 5.22.2 and peft 0.21.2.
 
@@ -243,7 +275,7 @@ Tested with Python 3.13, torch 2.14.1+cu126, transformers 5.22.2 and peft 0.21.2
   all correct.
 - **Labels come from a verifier**, which is only possible because rule equivalence can be decided
   exactly. Human preferences would be noisier.
-- **The 78.5% is not deployment-ready.** About 1 in 7 rules that pass the agreement check are still
+- **The 80% is not deployment-ready.** About 1 in 7 rules that pass the agreement check are still
   wrong, so a person should review every rule before it blocks a payment.
 
 ## Layout

@@ -249,6 +249,15 @@ def main() -> None:
                 if stop:
                     break
 
+            # Sampling from non-finite weights kills the CUDA context, which loses the evidence.
+            bad_params = [p for p in policy_params if not torch.isfinite(p).all()]
+            if bad_params:
+                record = {"event": "stopped", "iteration": iteration, "non_finite_tensors": len(bad_params)}
+                print(json.dumps(record), flush=True)
+                log.write(json.dumps(record) + "\n")
+                log.flush()
+                break
+
             record = {
                 "event": "iter",
                 "iteration": iteration,

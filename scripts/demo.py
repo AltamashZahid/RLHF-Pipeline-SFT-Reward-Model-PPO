@@ -22,8 +22,8 @@ from payrules.txngen import LABEL, generate_transactions
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("request")
-    parser.add_argument("--policy", default="checkpoints/v5/ppo")
-    parser.add_argument("--reward-model", default="checkpoints/v5/reward")
+    parser.add_argument("--policy", default="checkpoints/v5_full/ppo")
+    parser.add_argument("--reward-model", default="checkpoints/v5_full/reward")
     parser.add_argument("--samples", type=int, default=8)
     parser.add_argument("--strategy", default="majority_then_reward")
     parser.add_argument("--minimum-agreement", type=float, default=0.75)

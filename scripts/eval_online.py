@@ -27,8 +27,8 @@ def main() -> None:
     parser.add_argument("--rows", type=Path, default=Path("eval/online_rules.jsonl"))
     parser.add_argument("--models", nargs="+", default=["old_sft=checkpoints/sft", "v4_sft=checkpoints/v4/sft360",
                                                        "v5_sft=checkpoints/v5/sft360"])
-    parser.add_argument("--policy", default="checkpoints/v5/sft360")
-    parser.add_argument("--reward-model", default="checkpoints/v5/reward")
+    parser.add_argument("--policy", default="checkpoints/v5_full/ppo")
+    parser.add_argument("--reward-model", default="checkpoints/v5_full/reward")
     parser.add_argument("--samples", type=int, default=8)
     parser.add_argument("--strategy", default="majority_then_reward")
     parser.add_argument("--minimum-agreement", type=float, default=0.75)
